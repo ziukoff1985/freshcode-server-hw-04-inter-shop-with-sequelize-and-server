@@ -1,0 +1,32 @@
+{
+  "name": "freshcode-server-hw-04-inter-shop-with-sequelize-and-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziukoff1985/freshcode-server-hw-04-inter-shop-with-sequelize-and-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ziukoff1985/freshcode-server-hw-04-inter-shop-with-sequelize-and-server/issues"
+  },
+  "homepage": "https://github.com/ziukoff1985/freshcode-server-hw-04-inter-shop-with-sequelize-and-server#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "http-errors": "^2.0.1",
+    "pg": "^8.20.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.8",
+    "yup": "^1.7.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.5"
+  }
+}
