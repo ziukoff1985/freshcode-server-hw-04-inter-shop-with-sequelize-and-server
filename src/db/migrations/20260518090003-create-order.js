@@ -15,6 +15,8 @@ module.exports = {
             },
             date: {
                 type: Sequelize.DATE,
+                allowNull: false,
+                defaultValue: Sequelize.NOW,
             },
             amount: {
                 type: Sequelize.DECIMAL,
@@ -31,6 +33,8 @@ module.exports = {
                     model: 'customers',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             created_at: {
                 allowNull: false,

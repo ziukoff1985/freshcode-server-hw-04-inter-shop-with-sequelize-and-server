@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Store extends Model {
+    class ItemsOrders extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -9,27 +9,28 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Store.hasMany(models.Item, {
-                foreignKey: 'storeId',
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE',
-            });
         }
     }
-    Store.init(
+    ItemsOrders.init(
         {
-            title: {
-                type: DataTypes.STRING,
+            itemId: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
+                field: 'item_id',
             },
-            description: DataTypes.TEXT,
+            orderId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                field: 'order_id',
+            },
         },
         {
             sequelize,
-            modelName: 'Store',
-            tableName: 'stores',
+            modelName: 'ItemsOrders',
+            tableName: 'items_orders',
+            timestamps: false,
             underscored: true,
         },
     );
-    return Store;
+    return ItemsOrders;
 };

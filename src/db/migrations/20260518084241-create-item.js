@@ -16,6 +16,8 @@ module.exports = {
                     model: 'item_categories',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             type_id: {
                 type: Sequelize.INTEGER,
@@ -24,6 +26,8 @@ module.exports = {
                     model: 'item_types',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             brand_id: {
                 type: Sequelize.INTEGER,
@@ -32,6 +36,8 @@ module.exports = {
                     model: 'brands',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             model_id: {
                 type: Sequelize.INTEGER,
@@ -40,6 +46,8 @@ module.exports = {
                     model: 'models',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             price: {
                 type: Sequelize.DECIMAL,
@@ -52,6 +60,8 @@ module.exports = {
                     model: 'stores',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             amount: {
                 type: Sequelize.INTEGER,

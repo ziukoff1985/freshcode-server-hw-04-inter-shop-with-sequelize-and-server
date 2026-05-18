@@ -23,6 +23,8 @@ module.exports = {
                     model: 'brands',
                     key: 'id',
                 },
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             },
             created_at: {
                 allowNull: false,

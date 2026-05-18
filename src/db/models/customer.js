@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Customer.hasMany(models.Order, {
+                foreignKey: 'customerId',
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
+            });
         }
     }
     Customer.init(

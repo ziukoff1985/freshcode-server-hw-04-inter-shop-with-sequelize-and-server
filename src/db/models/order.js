@@ -1,5 +1,5 @@
 'use strict';
-const { Model } = require('sequelize');
+const { Model, Sequelize } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Order extends Model {
         /**
@@ -9,6 +9,13 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Order.belongsTo(models.Customer, {
+                foreignKey: 'customerId',
+            });
+            Order.belongsToMany(models.Item, {
+                through: models.ItemsOrders,
+                foreignKey: 'orderId',
+            });
         }
     }
     Order.init(
@@ -17,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            date: DataTypes.DATE,
+            date: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: Sequelize.NOW,
+            },
             amount: {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
