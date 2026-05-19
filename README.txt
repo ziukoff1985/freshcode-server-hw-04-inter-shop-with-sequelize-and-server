@@ -14,7 +14,7 @@
 13. редагуємо файл db/models/index.js -> !!! УВАЖНО змінюємо 'config' + додаємо 'configPath'
 14. у файлі index.js (в корні) -> імпортуємо 'db' з db/models/index.js + створюємо функцію dbConnectCheck (для перевірки з'єднання з БД)
 ------------------- Створення Моделей і Міграций -------------------
-15. Створюємо моделі: 
+15. Створюємо моделі (+ одночасно створюються міграції): 
     # 1. Brands
 npx sequelize-cli model:generate --name Brand --attributes "title:string,description:text"
 
@@ -38,3 +38,42 @@ npx sequelize-cli model:generate --name Item --attributes "category_id:integer,t
 
 # 8. Orders
 npx sequelize-cli model:generate --name Order --attributes "code:string,date:date,amount:decimal,paid:boolean,customer_id:integer"
+
+# 9. ItemsOrders
+npx sequelize-cli model:generate --name ItemsOrders --attributes "orderId:integer,itemId:integer"
+
+16. Коригуємо моделі і міграції по вимогам ДЗ (reference, associate, unique, etc.)
+17. Накатуємо міграції: npx sequelize-cli db:migrate --> перевіряємо коректність в БД
+18. Створюємо сидери для кожної сутності: npx sequelize seed:create --name ХХХХХХХ-some-name --> для цього використовуємо 'мокові' дані з constants/index.js
+19. Накатуємо сидери: 
+    - якщо ВСІ --> npx sequelize db:seed:all
+    - якщо окремо --> npx sequelize db:seed --seed _some-name
+    - перевіряємо в БД
+------------------- Сервер: роути, контролери, мідлвари ------------------
+20. Створюємо папки routes, controllers, middlewares, utils --> в папці src
+21. В папці routes -> створюємо файл index.js
+22. В папці routes -> створюємо файли для всіх сутностей:
+    - brandsRouter.js
+    - itemCategoriesRouter.js
+    - itemTypesRouter.js
+    - storesRouter.js
+    - customersRouter.js
+    - modelsRouter.js
+    - itemsRouter.js
+    - ordersRouter.js
+23. В папці controllers -> створюємо файли для всіх сутностей:
+    - brandsController.js
+    - itemCategoriesController.js
+    - itemTypesController.js
+    - storesController.js
+    - customersController.js
+    - modelsController.js
+    - itemsController.js
+    - ordersController.js
+24. В файлі controllers/brandsController.js -> створюємо контролери для сутності Brands:
+    - getAllBrands
+    - getBrandById
+    - createBrand
+    - updateBrand
+    - deleteBrand
+25. По аналогії створюємо контролери для інших сутностей + прописуємо під них роути
