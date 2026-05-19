@@ -1,145 +1,121 @@
 module.exports = {
     brands: [
-        { id: 1, title: 'Samsung', description: 'Global electronics leader' },
-        { id: 2, title: 'Apple', description: 'Premium tech and software' },
+        { title: 'Samsung', description: 'Global electronics leader' },
+        { title: 'Apple', description: 'Premium tech and software' },
         {
-            id: 3,
             title: 'Sony',
             description: 'Audio, video and gaming specialist',
         },
         {
-            id: 4,
             title: 'LG',
             description: 'Home appliances and display innovator',
         },
         {
-            id: 5,
             title: 'Dell',
             description: 'Computer and enterprise solutions',
         },
         {
-            id: 6,
             title: 'Bosch',
             description: 'German precision tools and appliances',
         },
-        { id: 7, title: 'Nike', description: 'Performance sports apparel' },
+        { title: 'Nike', description: 'Performance sports apparel' },
         {
-            id: 8,
             title: 'Logitech',
             description: 'Computer peripherals and accessories',
         },
-        { id: 9, title: 'Xiaomi', description: 'Affordable smart technology' },
+        { title: 'Xiaomi', description: 'Affordable smart technology' },
         {
-            id: 10,
             title: 'Asus',
             description: 'Gaming and high-performance hardware',
         },
-        { id: 11, title: 'HP', description: 'Printers and business laptops' },
-        { id: 12, title: 'Bose', description: 'High-end audio solutions' },
+        { title: 'HP', description: 'Printers and business laptops' },
+        { title: 'Bose', description: 'High-end audio solutions' },
         {
-            id: 13,
             title: 'Nikon',
             description: 'Professional imaging equipment',
         },
         {
-            id: 14,
             title: 'Dyson',
             description: 'Innovative home cleaning technology',
         },
         {
-            id: 15,
             title: 'Philips',
             description: 'Lighting and personal healthcare',
         },
     ],
     customers: [
         {
-            id: 1,
             name: 'Alice Johnson',
             email: 'alice@test.com',
             password: 'password123',
         },
         {
-            id: 2,
             name: 'Bob Smith',
             email: 'bob@test.com',
             password: 'password123',
         },
         {
-            id: 3,
             name: 'Charlie Davis',
             email: 'charlie@test.com',
             password: 'password123',
         },
         {
-            id: 4,
             name: 'Michael Brown',
             email: 'michael@test.com',
             password: 'password123',
         },
         {
-            id: 5,
             name: 'Emily Wilson',
             email: 'emily@test.com',
             password: 'password123',
         },
         {
-            id: 6,
             name: 'David Miller',
             email: 'david@test.com',
             password: 'password123',
             password: 'password123',
         },
         {
-            id: 7,
             name: 'Sarah Taylor',
             email: 'sarah@test.com',
             password: 'password123',
         },
         {
-            id: 8,
             name: 'James Anderson',
             email: 'james@test.com',
             password: 'password123',
         },
         {
-            id: 9,
             name: 'Linda Thomas',
             email: 'linda@test.com',
             password: 'password123',
         },
         {
-            id: 10,
             name: 'Robert Moore',
             email: 'robert@test.com',
             password: 'password123',
         },
         {
-            id: 11,
             name: 'Jessica Lee',
             email: 'jessica@test.com',
             password: 'password123',
         },
         {
-            id: 12,
             name: 'William Garcia',
             email: 'will@test.com',
             password: 'password123',
         },
         {
-            id: 13,
             name: 'Karen White',
             email: 'karen@test.com',
             password: 'password123',
         },
         {
-            id: 14,
             name: 'Joseph Harris',
             email: 'joseph@test.com',
             password: 'password123',
         },
         {
-            id: 15,
             name: 'Nancy Martin',
             email: 'nancy@test.com',
             password: 'password123',
@@ -147,66 +123,55 @@ module.exports = {
     ],
     itemCategories: [
         {
-            id: 1,
             title: 'Smartphones',
             description: 'Mobile phones and handheld devices',
         },
-        { id: 2, title: 'Laptops', description: 'Portable personal computers' },
+        { title: 'Laptops', description: 'Portable personal computers' },
         {
-            id: 3,
             title: 'Home Appliances',
             description: 'Kitchen and laundry equipment',
         },
         {
-            id: 4,
             title: 'Audio',
             description: 'Headphones, speakers and hi-fi systems',
         },
         {
-            id: 5,
             title: 'TV & Video',
             description: 'Televisions and projectors',
         },
         {
-            id: 6,
             title: 'Wearables',
             description: 'Smartwatches and fitness trackers',
         },
-        { id: 7, title: 'Cameras', description: 'Photo and video equipment' },
+        { title: 'Cameras', description: 'Photo and video equipment' },
         {
-            id: 8,
             title: 'Gaming',
             description: 'Consoles, controllers and PC gaming',
         },
-        { id: 9, title: 'Furniture', description: 'Home and office furniture' },
+        { title: 'Furniture', description: 'Home and office furniture' },
         {
-            id: 10,
             title: 'Sports',
             description: 'Gym equipment and outdoor gear',
         },
         {
-            id: 11,
             title: 'Kitchenware',
             description: 'Cooking tools and dining sets',
         },
         {
-            id: 12,
             title: 'Beauty',
             description: 'Personal care and grooming devices',
         },
         {
-            id: 13,
             title: 'Networking',
             description: 'Routers, switches and modems',
         },
-        { id: 14, title: 'Tools', description: 'Hand and power tools' },
+        { title: 'Tools', description: 'Hand and power tools' },
         {
-            id: 15,
             title: 'Lighting',
             description: 'Smart bulbs and home lighting',
         },
     ],
-    itemOrder: [
+    itemsOrders: [
         { item_id: 1, order_id: 1 },
         { item_id: 2, order_id: 2 },
         { item_id: 3, order_id: 3 },
@@ -264,174 +229,155 @@ module.exports = {
     ],
     itemTypes: [
         {
-            id: 1,
             title: 'Mobile Phone',
             description: 'Cellular communication devices',
         },
-        { id: 2, title: 'Notebook', description: 'Portable workstation' },
-        { id: 3, title: 'Fridge', description: 'Food cooling and freezing' },
+        { title: 'Notebook', description: 'Portable workstation' },
+        { title: 'Fridge', description: 'Food cooling and freezing' },
         {
-            id: 4,
             title: 'Wireless Earbuds',
             description: 'Bluetooth audio devices',
         },
         {
-            id: 5,
             title: 'OLED TV',
             description: 'High-end television displays',
         },
-        { id: 6, title: 'Smartwatch', description: 'Wrist-worn smart devices' },
+        { title: 'Smartwatch', description: 'Wrist-worn smart devices' },
         {
-            id: 7,
             title: 'DSLR Camera',
             description: 'Professional digital cameras',
         },
         {
-            id: 8,
             title: 'Game Console',
             description: 'Gaming hardware systems',
         },
-        { id: 9, title: 'Office Chair', description: 'Ergonomic seating' },
-        { id: 10, title: 'Treadmill', description: 'Indoor running equipment' },
+        { title: 'Office Chair', description: 'Ergonomic seating' },
+        { title: 'Treadmill', description: 'Indoor running equipment' },
         {
-            id: 11,
             title: 'Air Fryer',
             description: 'Healthy cooking appliances',
         },
-        { id: 12, title: 'Electric Shaver', description: 'Men grooming tools' },
+        { title: 'Electric Shaver', description: 'Men grooming tools' },
         {
-            id: 13,
             title: 'Wi-Fi Router',
             description: 'Internet connectivity devices',
         },
-        { id: 14, title: 'Drill', description: 'Power tools for construction' },
-        { id: 15, title: 'Smart Bulb', description: 'IoT enabled lighting' },
+        { title: 'Drill', description: 'Power tools for construction' },
+        { title: 'Smart Bulb', description: 'IoT enabled lighting' },
     ],
     models: [
-        { id: 1, title: 'Galaxy S24', description: 'Flagship', brand_id: 1 },
-        { id: 2, title: 'Galaxy A54', description: 'Mid-range', brand_id: 1 },
+        { title: 'Galaxy S24', description: 'Flagship', brand_id: 1 },
+        { title: 'Galaxy A54', description: 'Mid-range', brand_id: 1 },
         {
-            id: 3,
             title: 'Galaxy Watch 6',
             description: 'Wearable',
             brand_id: 1,
         },
-        { id: 4, title: 'QLED 4K TV', description: 'Display', brand_id: 1 },
-        { id: 5, title: 'Galaxy Tab S9', description: 'Tablet', brand_id: 1 },
+        { title: 'QLED 4K TV', description: 'Display', brand_id: 1 },
+        { title: 'Galaxy Tab S9', description: 'Tablet', brand_id: 1 },
 
-        { id: 6, title: 'iPhone 15', description: 'Flagship', brand_id: 2 },
-        { id: 7, title: 'MacBook Pro M3', description: 'Laptop', brand_id: 2 },
-        { id: 8, title: 'iPad Air', description: 'Tablet', brand_id: 2 },
-        { id: 9, title: 'AirPods Max', description: 'Audio', brand_id: 2 },
+        { title: 'iPhone 15', description: 'Flagship', brand_id: 2 },
+        { title: 'MacBook Pro M3', description: 'Laptop', brand_id: 2 },
+        { title: 'iPad Air', description: 'Tablet', brand_id: 2 },
+        { title: 'AirPods Max', description: 'Audio', brand_id: 2 },
         {
-            id: 10,
             title: 'iPhone 15 Pro',
             description: 'Flagship',
             brand_id: 2,
         },
 
-        { id: 11, title: 'PlayStation 5', description: 'Gaming', brand_id: 3 },
-        { id: 12, title: 'WH-1000XM5', description: 'Headphones', brand_id: 3 },
-        { id: 13, title: 'Alpha 7 IV', description: 'Camera', brand_id: 3 },
-        { id: 14, title: 'Bravia XR', description: 'TV', brand_id: 3 },
+        { title: 'PlayStation 5', description: 'Gaming', brand_id: 3 },
+        { title: 'WH-1000XM5', description: 'Headphones', brand_id: 3 },
+        { title: 'Alpha 7 IV', description: 'Camera', brand_id: 3 },
+        { title: 'Bravia XR', description: 'TV', brand_id: 3 },
         {
-            id: 15,
             title: 'PS5 Controller',
             description: 'Accessory',
             brand_id: 3,
         },
 
-        { id: 16, title: 'OLED C3', description: 'TV', brand_id: 4 },
-        { id: 17, title: 'InstaView', description: 'Fridge', brand_id: 4 },
-        { id: 18, title: 'Gram 17', description: 'Laptop', brand_id: 4 },
-        { id: 19, title: 'Air Fryer XXL', description: 'Kitchen', brand_id: 4 },
+        { title: 'OLED C3', description: 'TV', brand_id: 4 },
+        { title: 'InstaView', description: 'Fridge', brand_id: 4 },
+        { title: 'Gram 17', description: 'Laptop', brand_id: 4 },
+        { title: 'Air Fryer XXL', description: 'Kitchen', brand_id: 4 },
 
-        { id: 20, title: 'XPS 13', description: 'Laptop', brand_id: 5 },
+        { title: 'XPS 13', description: 'Laptop', brand_id: 5 },
         {
-            id: 21,
             title: 'Latitude 5000',
             description: 'Business PC',
             brand_id: 5,
         },
-        { id: 22, title: 'UltraSharp 27', description: 'Monitor', brand_id: 5 },
-        { id: 23, title: 'Dell G15', description: 'Gaming', brand_id: 5 },
+        { title: 'UltraSharp 27', description: 'Monitor', brand_id: 5 },
+        { title: 'Dell G15', description: 'Gaming', brand_id: 5 },
 
         {
-            id: 24,
             title: 'Series 6',
             description: 'Washing Machine',
             brand_id: 6,
         },
-        { id: 25, title: 'Unlimited 7', description: 'Vacuum', brand_id: 6 },
+        { title: 'Unlimited 7', description: 'Vacuum', brand_id: 6 },
         {
-            id: 26,
             title: 'EasyDrill 1200',
             description: 'Power tool',
             brand_id: 6,
         },
 
-        { id: 27, title: 'Air Max', description: 'Running', brand_id: 7 },
-        { id: 28, title: 'Pegasus 40', description: 'Training', brand_id: 7 },
-        { id: 29, title: 'Metcon 9', description: 'Gym', brand_id: 7 },
+        { title: 'Air Max', description: 'Running', brand_id: 7 },
+        { title: 'Pegasus 40', description: 'Training', brand_id: 7 },
+        { title: 'Metcon 9', description: 'Gym', brand_id: 7 },
 
-        { id: 30, title: 'MX Master 3S', description: 'Mouse', brand_id: 8 },
-        { id: 31, title: 'G Pro X', description: 'Keyboard', brand_id: 8 },
-        { id: 32, title: 'C920', description: 'Webcam', brand_id: 8 },
+        { title: 'MX Master 3S', description: 'Mouse', brand_id: 8 },
+        { title: 'G Pro X', description: 'Keyboard', brand_id: 8 },
+        { title: 'C920', description: 'Webcam', brand_id: 8 },
 
-        { id: 33, title: 'Redmi Note 13', description: 'Phone', brand_id: 9 },
-        { id: 34, title: 'Mi Band 8', description: 'Tracker', brand_id: 9 },
+        { title: 'Redmi Note 13', description: 'Phone', brand_id: 9 },
+        { title: 'Mi Band 8', description: 'Tracker', brand_id: 9 },
         {
-            id: 35,
             title: 'Robot Vacuum S10',
             description: 'Cleaning',
             brand_id: 9,
         },
 
         {
-            id: 36,
             title: 'ROG Strix',
             description: 'Gaming Laptop',
             brand_id: 10,
         },
         {
-            id: 37,
             title: 'Zenbook S13',
             description: 'Ultrabook',
             brand_id: 10,
         },
-        { id: 38, title: 'RT-AX88U', description: 'Router', brand_id: 10 },
+        { title: 'RT-AX88U', description: 'Router', brand_id: 10 },
 
-        { id: 39, title: 'LaserJet Pro', description: 'Printer', brand_id: 11 },
-        { id: 40, title: 'Spectre x360', description: 'Laptop', brand_id: 11 },
-        { id: 41, title: 'Pavilion', description: 'Desktop', brand_id: 11 },
+        { title: 'LaserJet Pro', description: 'Printer', brand_id: 11 },
+        { title: 'Spectre x360', description: 'Laptop', brand_id: 11 },
+        { title: 'Pavilion', description: 'Desktop', brand_id: 11 },
 
         {
-            id: 42,
             title: 'QuietComfort',
             description: 'Headphones',
             brand_id: 12,
         },
-        { id: 43, title: 'SoundLink', description: 'Speaker', brand_id: 12 },
+        { title: 'SoundLink', description: 'Speaker', brand_id: 12 },
 
-        { id: 44, title: 'Z9', description: 'Mirrorless Camera', brand_id: 13 },
-        { id: 45, title: 'D850', description: 'DSLR', brand_id: 13 },
+        { title: 'Z9', description: 'Mirrorless Camera', brand_id: 13 },
+        { title: 'D850', description: 'DSLR', brand_id: 13 },
 
-        { id: 46, title: 'V15 Detect', description: 'Vacuum', brand_id: 14 },
-        { id: 47, title: 'Airwrap', description: 'Beauty', brand_id: 14 },
-        { id: 48, title: 'Purifier Cool', description: 'Fan', brand_id: 14 },
+        { title: 'V15 Detect', description: 'Vacuum', brand_id: 14 },
+        { title: 'Airwrap', description: 'Beauty', brand_id: 14 },
+        { title: 'Purifier Cool', description: 'Fan', brand_id: 14 },
 
         {
-            id: 49,
             title: 'Hue Starter Kit',
             description: 'Lighting',
             brand_id: 15,
         },
-        { id: 50, title: 'Sonicare', description: 'Health', brand_id: 15 },
-        { id: 51, title: 'OneBlade', description: 'Shaver', brand_id: 15 },
+        { title: 'Sonicare', description: 'Health', brand_id: 15 },
+        { title: 'OneBlade', description: 'Shaver', brand_id: 15 },
     ],
     items: [
         {
-            id: 1,
             category_id: 1,
             type_id: 1,
             brand_id: 1,
@@ -441,7 +387,6 @@ module.exports = {
             amount: 10,
         },
         {
-            id: 2,
             category_id: 1,
             type_id: 1,
             brand_id: 1,
@@ -451,7 +396,6 @@ module.exports = {
             amount: 25,
         },
         {
-            id: 3,
             category_id: 1,
             type_id: 6,
             brand_id: 1,
@@ -461,7 +405,6 @@ module.exports = {
             amount: 15,
         },
         {
-            id: 4,
             category_id: 5,
             type_id: 5,
             brand_id: 1,
@@ -471,7 +414,6 @@ module.exports = {
             amount: 5,
         },
         {
-            id: 5,
             category_id: 1,
             type_id: 2,
             brand_id: 1,
@@ -482,7 +424,6 @@ module.exports = {
         },
 
         {
-            id: 6,
             category_id: 1,
             type_id: 1,
             brand_id: 2,
@@ -492,7 +433,6 @@ module.exports = {
             amount: 12,
         },
         {
-            id: 7,
             category_id: 2,
             type_id: 2,
             brand_id: 2,
@@ -502,7 +442,6 @@ module.exports = {
             amount: 7,
         },
         {
-            id: 8,
             category_id: 6,
             type_id: 6,
             brand_id: 2,
@@ -512,7 +451,6 @@ module.exports = {
             amount: 20,
         },
         {
-            id: 9,
             category_id: 4,
             type_id: 4,
             brand_id: 2,
@@ -522,7 +460,6 @@ module.exports = {
             amount: 30,
         },
         {
-            id: 10,
             category_id: 1,
             type_id: 1,
             brand_id: 2,
@@ -533,7 +470,6 @@ module.exports = {
         },
 
         {
-            id: 11,
             category_id: 8,
             type_id: 8,
             brand_id: 3,
@@ -543,7 +479,6 @@ module.exports = {
             amount: 50,
         },
         {
-            id: 12,
             category_id: 4,
             type_id: 4,
             brand_id: 3,
@@ -553,7 +488,6 @@ module.exports = {
             amount: 40,
         },
         {
-            id: 13,
             category_id: 7,
             type_id: 7,
             brand_id: 3,
@@ -563,7 +497,6 @@ module.exports = {
             amount: 5,
         },
         {
-            id: 14,
             category_id: 5,
             type_id: 5,
             brand_id: 3,
@@ -573,7 +506,6 @@ module.exports = {
             amount: 3,
         },
         {
-            id: 15,
             category_id: 8,
             type_id: 8,
             brand_id: 3,
@@ -584,7 +516,6 @@ module.exports = {
         },
 
         {
-            id: 16,
             category_id: 5,
             type_id: 5,
             brand_id: 4,
@@ -594,7 +525,6 @@ module.exports = {
             amount: 6,
         },
         {
-            id: 17,
             category_id: 3,
             type_id: 3,
             brand_id: 4,
@@ -604,7 +534,6 @@ module.exports = {
             amount: 4,
         },
         {
-            id: 18,
             category_id: 2,
             type_id: 2,
             brand_id: 4,
@@ -614,7 +543,6 @@ module.exports = {
             amount: 9,
         },
         {
-            id: 19,
             category_id: 3,
             type_id: 11,
             brand_id: 4,
@@ -625,7 +553,6 @@ module.exports = {
         },
 
         {
-            id: 20,
             category_id: 2,
             type_id: 2,
             brand_id: 5,
@@ -635,7 +562,6 @@ module.exports = {
             amount: 11,
         },
         {
-            id: 21,
             category_id: 2,
             type_id: 2,
             brand_id: 5,
@@ -645,7 +571,6 @@ module.exports = {
             amount: 14,
         },
         {
-            id: 22,
             category_id: 5,
             type_id: 3,
             brand_id: 5,
@@ -655,7 +580,6 @@ module.exports = {
             amount: 20,
         },
         {
-            id: 23,
             category_id: 8,
             type_id: 8,
             brand_id: 5,
@@ -666,7 +590,6 @@ module.exports = {
         },
 
         {
-            id: 24,
             category_id: 3,
             type_id: 3,
             brand_id: 6,
@@ -676,7 +599,6 @@ module.exports = {
             amount: 10,
         },
         {
-            id: 25,
             category_id: 3,
             type_id: 3,
             brand_id: 6,
@@ -686,7 +608,6 @@ module.exports = {
             amount: 12,
         },
         {
-            id: 26,
             category_id: 14,
             type_id: 14,
             brand_id: 6,
@@ -697,7 +618,6 @@ module.exports = {
         },
 
         {
-            id: 27,
             category_id: 10,
             type_id: 10,
             brand_id: 7,
@@ -707,7 +627,6 @@ module.exports = {
             amount: 60,
         },
         {
-            id: 28,
             category_id: 10,
             type_id: 10,
             brand_id: 7,
@@ -717,7 +636,6 @@ module.exports = {
             amount: 55,
         },
         {
-            id: 29,
             category_id: 10,
             type_id: 10,
             brand_id: 7,
@@ -728,7 +646,6 @@ module.exports = {
         },
 
         {
-            id: 30,
             category_id: 8,
             type_id: 8,
             brand_id: 8,
@@ -738,7 +655,6 @@ module.exports = {
             amount: 80,
         },
         {
-            id: 31,
             category_id: 8,
             type_id: 8,
             brand_id: 8,
@@ -748,7 +664,6 @@ module.exports = {
             amount: 25,
         },
         {
-            id: 32,
             category_id: 8,
             type_id: 13,
             brand_id: 8,
@@ -759,7 +674,6 @@ module.exports = {
         },
 
         {
-            id: 33,
             category_id: 1,
             type_id: 1,
             brand_id: 9,
@@ -769,7 +683,6 @@ module.exports = {
             amount: 70,
         },
         {
-            id: 34,
             category_id: 6,
             type_id: 6,
             brand_id: 9,
@@ -779,7 +692,6 @@ module.exports = {
             amount: 150,
         },
         {
-            id: 35,
             category_id: 3,
             type_id: 3,
             brand_id: 9,
@@ -790,7 +702,6 @@ module.exports = {
         },
 
         {
-            id: 36,
             category_id: 2,
             type_id: 2,
             brand_id: 10,
@@ -800,7 +711,6 @@ module.exports = {
             amount: 5,
         },
         {
-            id: 37,
             category_id: 2,
             type_id: 2,
             brand_id: 10,
@@ -810,7 +720,6 @@ module.exports = {
             amount: 8,
         },
         {
-            id: 38,
             category_id: 13,
             type_id: 13,
             brand_id: 10,
@@ -821,7 +730,6 @@ module.exports = {
         },
 
         {
-            id: 39,
             category_id: 11,
             type_id: 11,
             brand_id: 11,
@@ -831,7 +739,6 @@ module.exports = {
             amount: 20,
         },
         {
-            id: 40,
             category_id: 2,
             type_id: 2,
             brand_id: 11,
@@ -841,7 +748,6 @@ module.exports = {
             amount: 4,
         },
         {
-            id: 41,
             category_id: 2,
             type_id: 2,
             brand_id: 11,
@@ -852,7 +758,6 @@ module.exports = {
         },
 
         {
-            id: 42,
             category_id: 4,
             type_id: 4,
             brand_id: 12,
@@ -862,7 +767,6 @@ module.exports = {
             amount: 45,
         },
         {
-            id: 43,
             category_id: 4,
             type_id: 4,
             brand_id: 12,
@@ -873,7 +777,6 @@ module.exports = {
         },
 
         {
-            id: 44,
             category_id: 7,
             type_id: 7,
             brand_id: 13,
@@ -883,7 +786,6 @@ module.exports = {
             amount: 2,
         },
         {
-            id: 45,
             category_id: 7,
             type_id: 7,
             brand_id: 13,
@@ -894,7 +796,6 @@ module.exports = {
         },
 
         {
-            id: 46,
             category_id: 3,
             type_id: 3,
             brand_id: 14,
@@ -904,7 +805,6 @@ module.exports = {
             amount: 10,
         },
         {
-            id: 47,
             category_id: 12,
             type_id: 12,
             brand_id: 14,
@@ -914,7 +814,6 @@ module.exports = {
             amount: 15,
         },
         {
-            id: 48,
             category_id: 5,
             type_id: 5,
             brand_id: 14,
@@ -925,7 +824,6 @@ module.exports = {
         },
 
         {
-            id: 49,
             category_id: 15,
             type_id: 15,
             brand_id: 15,
@@ -935,7 +833,6 @@ module.exports = {
             amount: 200,
         },
         {
-            id: 50,
             category_id: 12,
             type_id: 12,
             brand_id: 15,
@@ -947,7 +844,6 @@ module.exports = {
     ],
     orders: [
         {
-            id: 1,
             code: 'ORD-001',
             date: '2026-03-10T13:12:58.402Z',
             amount: 1200.0,
@@ -955,7 +851,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 2,
             code: 'ORD-002',
             date: '2026-03-10T13:12:58.402Z',
             amount: 450.0,
@@ -963,7 +858,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 3,
             code: 'ORD-003',
             date: '2026-03-10T13:12:58.402Z',
             amount: 300.0,
@@ -971,7 +865,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 4,
             code: 'ORD-004',
             date: '2026-03-10T13:12:58.402Z',
             amount: 150.0,
@@ -979,7 +872,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 5,
             code: 'ORD-005',
             date: '2026-03-10T13:12:58.402Z',
             amount: 800.0,
@@ -987,7 +879,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 6,
             code: 'ORD-006',
             date: '2026-03-10T13:12:58.402Z',
             amount: 100.0,
@@ -995,7 +886,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 7,
             code: 'ORD-007',
             date: '2026-03-10T13:12:58.402Z',
             amount: 200.0,
@@ -1003,7 +893,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 8,
             code: 'ORD-008',
             date: '2026-03-10T13:12:58.402Z',
             amount: 9500.0,
@@ -1011,7 +900,6 @@ module.exports = {
             customer_id: 4,
         },
         {
-            id: 9,
             code: 'ORD-009',
             date: '2026-03-10T13:12:58.402Z',
             amount: 1500.0,
@@ -1019,7 +907,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 10,
             code: 'ORD-010',
             date: '2026-03-10T13:12:58.402Z',
             amount: 600.0,
@@ -1027,7 +914,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 11,
             code: 'ORD-011',
             date: '2026-03-10T13:12:58.402Z',
             amount: 2200.0,
@@ -1035,7 +921,6 @@ module.exports = {
             customer_id: 3,
         },
         {
-            id: 12,
             code: 'ORD-012',
             date: '2026-03-10T13:12:58.402Z',
             amount: 500.0,
@@ -1043,7 +928,6 @@ module.exports = {
             customer_id: 5,
         },
         {
-            id: 13,
             code: 'ORD-013',
             date: '2026-03-10T13:12:58.402Z',
             amount: 150.0,
@@ -1051,7 +935,6 @@ module.exports = {
             customer_id: 6,
         },
         {
-            id: 14,
             code: 'ORD-014',
             date: '2026-03-10T13:12:58.402Z',
             amount: 80.0,
@@ -1059,7 +942,6 @@ module.exports = {
             customer_id: 7,
         },
         {
-            id: 15,
             code: 'ORD-015',
             date: '2026-03-10T13:12:58.402Z',
             amount: 120.0,
@@ -1067,7 +949,6 @@ module.exports = {
             customer_id: 8,
         },
         {
-            id: 16,
             code: 'ORD-016',
             date: '2026-03-10T13:12:58.402Z',
             amount: 250.0,
@@ -1075,7 +956,6 @@ module.exports = {
             customer_id: 9,
         },
         {
-            id: 17,
             code: 'ORD-017',
             date: '2026-03-10T13:12:58.402Z',
             amount: 400.0,
@@ -1083,7 +963,6 @@ module.exports = {
             customer_id: 10,
         },
         {
-            id: 18,
             code: 'ORD-018',
             date: '2026-03-10T13:12:58.402Z',
             amount: 900.0,
@@ -1091,7 +970,6 @@ module.exports = {
             customer_id: 11,
         },
         {
-            id: 19,
             code: 'ORD-019',
             date: '2026-03-10T13:12:58.402Z',
             amount: 110.0,
@@ -1099,7 +977,6 @@ module.exports = {
             customer_id: 12,
         },
         {
-            id: 20,
             code: 'ORD-020',
             date: '2026-03-10T13:12:58.402Z',
             amount: 300.0,
@@ -1107,7 +984,6 @@ module.exports = {
             customer_id: 13,
         },
         {
-            id: 21,
             code: 'ORD-021',
             date: '2026-03-10T13:12:58.402Z',
             amount: 450.0,
@@ -1115,7 +991,6 @@ module.exports = {
             customer_id: 14,
         },
         {
-            id: 22,
             code: 'ORD-022',
             date: '2026-03-10T13:12:58.402Z',
             amount: 600.0,
@@ -1123,7 +998,6 @@ module.exports = {
             customer_id: 15,
         },
         {
-            id: 23,
             code: 'ORD-023',
             date: '2026-03-10T13:12:58.402Z',
             amount: 700.0,
@@ -1131,7 +1005,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 24,
             code: 'ORD-024',
             date: '2026-03-10T13:12:58.402Z',
             amount: 100.0,
@@ -1139,7 +1012,6 @@ module.exports = {
             customer_id: 3,
         },
         {
-            id: 25,
             code: 'ORD-025',
             date: '2026-03-10T13:12:58.402Z',
             amount: 200.0,
@@ -1147,7 +1019,6 @@ module.exports = {
             customer_id: 5,
         },
         {
-            id: 26,
             code: 'ORD-026',
             date: '2026-03-10T13:12:58.402Z',
             amount: 300.0,
@@ -1155,7 +1026,6 @@ module.exports = {
             customer_id: 6,
         },
         {
-            id: 27,
             code: 'ORD-027',
             date: '2026-03-10T13:12:58.402Z',
             amount: 400.0,
@@ -1163,7 +1033,6 @@ module.exports = {
             customer_id: 7,
         },
         {
-            id: 28,
             code: 'ORD-028',
             date: '2026-03-10T13:12:58.402Z',
             amount: 500.0,
@@ -1171,7 +1040,6 @@ module.exports = {
             customer_id: 8,
         },
         {
-            id: 29,
             code: 'ORD-029',
             date: '2026-03-10T13:12:58.402Z',
             amount: 600.0,
@@ -1179,7 +1047,6 @@ module.exports = {
             customer_id: 9,
         },
         {
-            id: 30,
             code: 'ORD-030',
             date: '2026-03-10T13:12:58.402Z',
             amount: 700.0,
@@ -1188,7 +1055,6 @@ module.exports = {
         },
 
         {
-            id: 31,
             code: 'ORD-031',
             date: '2026-03-10T13:12:58.402Z',
             amount: 800.0,
@@ -1196,7 +1062,6 @@ module.exports = {
             customer_id: 11,
         },
         {
-            id: 32,
             code: 'ORD-032',
             date: '2026-03-10T13:12:58.402Z',
             amount: 900.0,
@@ -1204,7 +1069,6 @@ module.exports = {
             customer_id: 12,
         },
         {
-            id: 33,
             code: 'ORD-033',
             date: '2026-03-10T13:12:58.402Z',
             amount: 1000.0,
@@ -1212,7 +1076,6 @@ module.exports = {
             customer_id: 13,
         },
         {
-            id: 34,
             code: 'ORD-034',
             date: '2026-03-10T13:12:58.402Z',
             amount: 110.0,
@@ -1220,7 +1083,6 @@ module.exports = {
             customer_id: 14,
         },
         {
-            id: 35,
             code: 'ORD-035',
             date: '2026-03-10T13:12:58.402Z',
             amount: 220.0,
@@ -1228,7 +1090,6 @@ module.exports = {
             customer_id: 15,
         },
         {
-            id: 36,
             code: 'ORD-036',
             date: '2026-03-10T13:12:58.402Z',
             amount: 330.0,
@@ -1236,7 +1097,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 37,
             code: 'ORD-037',
             date: '2026-03-10T13:12:58.402Z',
             amount: 440.0,
@@ -1244,7 +1104,6 @@ module.exports = {
             customer_id: 3,
         },
         {
-            id: 38,
             code: 'ORD-038',
             date: '2026-03-10T13:12:58.402Z',
             amount: 550.0,
@@ -1252,7 +1111,6 @@ module.exports = {
             customer_id: 5,
         },
         {
-            id: 39,
             code: 'ORD-039',
             date: '2026-03-10T13:12:58.402Z',
             amount: 660.0,
@@ -1260,7 +1118,6 @@ module.exports = {
             customer_id: 6,
         },
         {
-            id: 40,
             code: 'ORD-040',
             date: '2026-03-10T13:12:58.402Z',
             amount: 770.0,
@@ -1269,7 +1126,6 @@ module.exports = {
         },
 
         {
-            id: 41,
             code: 'ORD-041',
             date: '2026-03-10T13:12:58.402Z',
             amount: 880.0,
@@ -1277,7 +1133,6 @@ module.exports = {
             customer_id: 8,
         },
         {
-            id: 42,
             code: 'ORD-042',
             date: '2026-03-10T13:12:58.402Z',
             amount: 990.0,
@@ -1285,7 +1140,6 @@ module.exports = {
             customer_id: 9,
         },
         {
-            id: 43,
             code: 'ORD-043',
             date: '2026-03-10T13:12:58.402Z',
             amount: 150.0,
@@ -1293,7 +1147,6 @@ module.exports = {
             customer_id: 10,
         },
         {
-            id: 44,
             code: 'ORD-044',
             date: '2026-03-10T13:12:58.402Z',
             amount: 250.0,
@@ -1301,7 +1154,6 @@ module.exports = {
             customer_id: 11,
         },
         {
-            id: 45,
             code: 'ORD-045',
             date: '2026-03-10T13:12:58.402Z',
             amount: 350.0,
@@ -1309,7 +1161,6 @@ module.exports = {
             customer_id: 12,
         },
         {
-            id: 46,
             code: 'ORD-046',
             date: '2026-03-10T13:12:58.402Z',
             amount: 450.0,
@@ -1317,7 +1168,6 @@ module.exports = {
             customer_id: 13,
         },
         {
-            id: 47,
             code: 'ORD-047',
             date: '2026-03-10T13:12:58.402Z',
             amount: 550.0,
@@ -1325,7 +1175,6 @@ module.exports = {
             customer_id: 14,
         },
         {
-            id: 48,
             code: 'ORD-048',
             date: '2026-03-10T13:12:58.402Z',
             amount: 650.0,
@@ -1333,7 +1182,6 @@ module.exports = {
             customer_id: 15,
         },
         {
-            id: 49,
             code: 'ORD-049',
             date: '2026-03-10T13:12:58.402Z',
             amount: 750.0,
@@ -1341,7 +1189,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 50,
             code: 'ORD-050',
             date: '2026-03-10T13:12:58.402Z',
             amount: 850.0,
@@ -1350,7 +1197,6 @@ module.exports = {
         },
 
         {
-            id: 52,
             code: 'ORD-051',
             date: '2026-03-12T14:41:12.682Z',
             amount: 1500.0,
@@ -1358,7 +1204,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 53,
             code: 'ORD-052',
             date: '2026-03-12T14:41:12.682Z',
             amount: 9500.0,
@@ -1366,7 +1211,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 54,
             code: 'ORD-053',
             date: '2026-03-12T14:41:12.682Z',
             amount: 9500.0,
@@ -1374,7 +1218,6 @@ module.exports = {
             customer_id: 7,
         },
         {
-            id: 55,
             code: 'ORD-054',
             date: '2026-03-12T14:48:45.539Z',
             amount: 1200.0,
@@ -1382,7 +1225,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 56,
             code: 'ORD-055',
             date: '2026-03-12T14:48:45.539Z',
             amount: 450.0,
@@ -1390,7 +1232,6 @@ module.exports = {
             customer_id: 1,
         },
         {
-            id: 57,
             code: 'ORD-056',
             date: '2026-03-12T14:48:45.539Z',
             amount: 300.0,
@@ -1399,7 +1240,6 @@ module.exports = {
         },
 
         {
-            id: 58,
             code: 'ORD-058',
             date: '2026-03-12T14:50:41.881Z',
             amount: 1200.0,
@@ -1407,7 +1247,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 59,
             code: 'ORD-059',
             date: '2026-03-12T14:50:41.881Z',
             amount: 450.0,
@@ -1415,7 +1254,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 60,
             code: 'ORD-060',
             date: '2026-03-12T14:50:41.881Z',
             amount: 300.0,
@@ -1423,7 +1261,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 61,
             code: 'ORD-061',
             date: '2026-03-12T14:50:41.881Z',
             amount: 150.0,
@@ -1431,7 +1268,6 @@ module.exports = {
             customer_id: 2,
         },
         {
-            id: 62,
             code: 'ORD-062',
             date: '2026-03-12T14:50:41.881Z',
             amount: 800.0,
@@ -1441,27 +1277,22 @@ module.exports = {
     ],
     stores: [
         {
-            id: 1,
             title: 'Main Warehouse',
             description: 'Central distribution hub in Kyiv',
         },
         {
-            id: 2,
             title: 'Western Hub',
             description: 'Regional warehouse in Lviv',
         },
         {
-            id: 3,
             title: 'Southern Port',
             description: 'Import terminal in Odesa',
         },
         {
-            id: 4,
             title: 'Eastern Branch',
             description: 'Warehouse facility in Kharkiv',
         },
         {
-            id: 5,
             title: 'Retail Outlet',
             description: 'Direct store warehouse in Dnipro',
         },
