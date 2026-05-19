@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const { customers } = require('../../constants/index');
 
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
     async up(queryInterface, Sequelize) {
         // Hash passwords
