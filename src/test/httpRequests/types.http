@@ -1,0 +1,30 @@
+GET http://localhost:5000/api/types
+
+###
+
+GET http://localhost:5000/api/types/2
+
+###
+
+POST http://localhost:5000/api/types HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Smartwatch",
+    "description": "Some description about Smartwatch"
+}
+
+###
+
+PUT http://localhost:5000/api/types HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 16,
+    "title": "Fridge",
+    "description": "Some description about Fridge"
+}
+
+###
+
+DELETE http://localhost:5000/api/types/16

@@ -20,11 +20,11 @@ PUT http://localhost:5000/api/brands HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 18,
+    "id": 19,
     "title": "Acer",
     "description": "Some description about Acer"
 }
 
 ###
 
-DELETE http://localhost:5000/api/brands/18
+DELETE http://localhost:5000/api/brands/19

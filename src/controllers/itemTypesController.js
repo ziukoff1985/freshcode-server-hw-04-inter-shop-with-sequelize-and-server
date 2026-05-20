@@ -1,77 +1,77 @@
 const createError = require('http-errors');
 
-const { Brand } = require('../db/models/index');
+const { ItemType } = require('../db/models/index');
 
-class BrandsController {
-    async getAllBrands(req, res, next) {
+class ItemTypesController {
+    async getAllTypes(req, res, next) {
         try {
-            const brands = await Brand.findAll({
+            const types = await ItemType.findAll({
                 limit: 10,
                 order: [['id', 'ASC']],
             });
-            if (brands.length === 0) {
-                next(createError(404, 'Brands not found'));
+            if (types.length === 0) {
+                next(createError(404, 'Types not found'));
             }
-            console.log(`Result is: ${JSON.stringify(brands, null, 2)}`);
-            res.status(200).json(brands);
+            console.log(`Result is: ${JSON.stringify(types, null, 2)}`);
+            res.status(200).json(types);
         } catch (error) {
             console.log(error.message);
             next(error.message);
         }
     }
 
-    async getBrandById(req, res, next) {
+    async getTypeById(req, res, next) {
         try {
             const { id } = req.params;
-            const brand = await Brand.findByPk(id);
-            if (!brand) {
-                next(createError(404, 'Brand not found'));
+            const type = await ItemType.findByPk(id);
+            if (!type) {
+                next(createError(404, 'Type not found'));
             }
-            console.log(`Result is: ${JSON.stringify(brand, null, 2)}`);
-            res.status(200).json(brand);
+            console.log(`Result is: ${JSON.stringify(type, null, 2)}`);
+            res.status(200).json(type);
         } catch (error) {
             console.log(error.message);
             next(error.message);
         }
     }
 
-    async createBrand(req, res, next) {
+    async createType(req, res, next) {
         try {
             const { title, description } = req.body;
-            const brand = await Brand.create({ title, description });
-            console.log(`Result is: ${JSON.stringify(brand, null, 2)}`);
-            res.status(201).json(brand);
+            const type = await ItemType.create({ title, description });
+            console.log(`Result is: ${JSON.stringify(type, null, 2)}`);
+            res.status(201).json(type);
         } catch (error) {
             console.log(error.message);
             next(error.message);
         }
     }
 
-    async deleteBrand(req, res, next) {
+    async deleteType(req, res, next) {
         try {
             const { id } = req.params;
-            const brand = await Brand.destroy({ where: { id } });
-            if (brand === 0) {
-                next(createError(404, 'Brand not found'));
+            const type = await ItemType.destroy({ where: { id } });
+            if (type === 0) {
+                next(createError(404, 'Type not found'));
             }
-            console.log(`Result is: ${brand}`);
-            res.status(200).json(brand);
+            console.log(`Result is: ${type}`);
+            res.status(200).json(type);
         } catch (error) {
             console.log(error.message);
             next(error.message);
         }
     }
 
-    async updateBrand(req, res, next) {
+    async updateType(req, res, next) {
         try {
             const { id, title, description } = req.body;
-            const brand = await Brand.findOne({ where: { id } });
-            if (!brand) {
-                next(createError(404, 'Brand not found'));
+            const type = await ItemType.findOne({ where: { id } });
+            if (!type) {
+                next(createError(404, 'Type not found'));
             }
-            await brand.update({ title, description });
-            console.log(`Result is: ${JSON.stringify(brand, null, 2)}`);
-            res.status(200).json(brand);
+            await type.update({ title, description });
+            console.log(`Result is: ${JSON.stringify(type, null, 2)}`);
+            res.status(200).json(type);
         } catch (error) {
             console.log(error.message);
             next(error.message);
@@ -79,4 +79,4 @@ class BrandsController {
     }
 }
 
-module.exports = new BrandsController();
+module.exports = new ItemTypesController();
