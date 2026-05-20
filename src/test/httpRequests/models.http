@@ -1,0 +1,32 @@
+GET http://localhost:5000/api/models
+
+###
+
+GET http://localhost:5000/api/models/2
+
+###
+
+POST http://localhost:5000/api/models HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Mavic 3",
+    "description": "Some description about Mavic 3",
+    "brandTitle": "Xiaomi"
+}
+
+###
+
+PUT http://localhost:5000/api/models HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 58,
+    "title": "Jetpack 4",
+    "description": "Some description about Jetpack 4",
+    "brandTitle": "Sony"
+}
+
+###
+
+DELETE http://localhost:5000/api/models/58

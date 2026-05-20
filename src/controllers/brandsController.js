@@ -10,13 +10,13 @@ class BrandsController {
                 order: [['id', 'ASC']],
             });
             if (brands.length === 0) {
-                next(createError(404, 'Brands not found'));
+                return next(createError(404, 'Brands not found'));
             }
             console.log(`Result is: ${JSON.stringify(brands, null, 2)}`);
             res.status(200).json(brands);
         } catch (error) {
             console.log(error.message);
-            next(error.message);
+            next(error);
         }
     }
 
@@ -25,13 +25,13 @@ class BrandsController {
             const { id } = req.params;
             const brand = await Brand.findByPk(id);
             if (!brand) {
-                next(createError(404, 'Brand not found'));
+                return next(createError(404, 'Brand not found'));
             }
             console.log(`Result is: ${JSON.stringify(brand, null, 2)}`);
             res.status(200).json(brand);
         } catch (error) {
             console.log(error.message);
-            next(error.message);
+            next(error);
         }
     }
 
@@ -43,22 +43,24 @@ class BrandsController {
             res.status(201).json(brand);
         } catch (error) {
             console.log(error.message);
-            next(error.message);
+            next(error);
         }
     }
 
     async deleteBrand(req, res, next) {
         try {
             const { id } = req.params;
-            const brand = await Brand.destroy({ where: { id } });
-            if (brand === 0) {
-                next(createError(404, 'Brand not found'));
+            const deletedRows = await Brand.destroy({ where: { id } });
+            if (deletedRows === 0) {
+                return next(createError(404, 'Brand not found'));
             }
-            console.log(`Result is: ${brand}`);
-            res.status(200).json(brand);
+            console.log(`Deleted rows: ${deletedRows}`);
+            res.status(200).json({
+                message: 'Brand deleted successfully',
+            });
         } catch (error) {
             console.log(error.message);
-            next(error.message);
+            next(error);
         }
     }
 
@@ -67,14 +69,14 @@ class BrandsController {
             const { id, title, description } = req.body;
             const brand = await Brand.findOne({ where: { id } });
             if (!brand) {
-                next(createError(404, 'Brand not found'));
+                return next(createError(404, 'Brand not found'));
             }
             await brand.update({ title, description });
             console.log(`Result is: ${JSON.stringify(brand, null, 2)}`);
             res.status(200).json(brand);
         } catch (error) {
             console.log(error.message);
-            next(error.message);
+            next(error);
         }
     }
 }
