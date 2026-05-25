@@ -67,7 +67,7 @@ class StoresController {
     async updateStore(req, res, next) {
         try {
             const { id, title, description } = req.body;
-            const store = await Store.findOne({ where: { id } });
+            const store = await Store.findByPk(id);
             if (!store) {
                 return next(createError(404, 'Store not found'));
             }

@@ -67,7 +67,7 @@ class ItemCategoriesController {
     async updateCategory(req, res, next) {
         try {
             const { id, title, description } = req.body;
-            const category = await ItemCategory.findOne({ where: { id } });
+            const category = await ItemCategory.findByPk(id);
             if (!category) {
                 return next(createError(404, 'Category not found'));
             }

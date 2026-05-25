@@ -67,7 +67,7 @@ class ItemTypesController {
     async updateType(req, res, next) {
         try {
             const { id, title, description } = req.body;
-            const type = await ItemType.findOne({ where: { id } });
+            const type = await ItemType.findByPk(id);
             if (!type) {
                 return next(createError(404, 'Type not found'));
             }

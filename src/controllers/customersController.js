@@ -67,7 +67,7 @@ class CustomersController {
     async updateCustomer(req, res, next) {
         try {
             const { id, name, email, password } = req.body;
-            const customer = await Customer.findOne({ where: { id } });
+            const customer = await Customer.findByPk(id);
             if (!customer) {
                 return next(createError(404, 'Customer not found'));
             }

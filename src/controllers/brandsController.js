@@ -67,7 +67,7 @@ class BrandsController {
     async updateBrand(req, res, next) {
         try {
             const { id, title, description } = req.body;
-            const brand = await Brand.findOne({ where: { id } });
+            const brand = await Brand.findByPk(id);
             if (!brand) {
                 return next(createError(404, 'Brand not found'));
             }

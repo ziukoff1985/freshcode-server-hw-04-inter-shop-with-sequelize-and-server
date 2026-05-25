@@ -76,4 +76,16 @@ npx sequelize-cli model:generate --name ItemsOrders --attributes "orderId:intege
     - createBrand
     - updateBrand
     - deleteBrand
-25. По аналогії створюємо контролери для інших сутностей + прописуємо під них роути
+25. По аналогії створюємо контролери для інших сутностей:
+    - itemCategories
+    - itemTypes
+    - stores
+    - customers
+    - models
+    - items
+    - orders 
+        + прописуємо під них роути
+26. В папці middlewares -> створюємо Файли
+    - index.js
+    - errorHandler.mw.js
+    - hashPassword.mw.js

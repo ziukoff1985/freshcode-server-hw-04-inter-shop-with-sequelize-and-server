@@ -8,6 +8,8 @@ class ModelsController {
             const models = await Model.findAll({
                 limit: 10,
                 order: [['id', 'ASC']],
+                attributes: ['id', 'title', 'description'],
+                include: [{ model: Brand, attributes: ['title'] }],
             });
             if (models.length === 0) {
                 return next(createError(404, 'Models not found'));
@@ -23,7 +25,11 @@ class ModelsController {
     async getModelById(req, res, next) {
         try {
             const { id } = req.params;
-            const model = await Model.findByPk(id);
+            const model = await Model.findOne({
+                where: { id },
+                attributes: ['id', 'title', 'description'],
+                include: [{ model: Brand, attributes: ['title'] }],
+            });
             if (!model) {
                 return next(createError(404, 'Model not found'));
             }
