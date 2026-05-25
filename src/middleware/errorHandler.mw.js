@@ -11,6 +11,8 @@ const validationErrorHandler = (err, req, res, next) => {
             ],
         });
     }
+
+    next(err);
 };
 
 const errorHandler = (err, req, res, next) => {
@@ -23,7 +25,7 @@ const errorHandler = (err, req, res, next) => {
             errors: [
                 {
                     title: 'Duplicate Error',
-                    detail: error.detail,
+                    detail: err.detail,
                 },
             ],
         });

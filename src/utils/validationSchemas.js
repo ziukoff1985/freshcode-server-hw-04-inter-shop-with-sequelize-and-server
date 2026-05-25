@@ -5,7 +5,7 @@ const TITLE_NAME_CODE_SCHEMA = yup.string().trim().min(2).max(100).required();
 
 const DESCRIPTION_SCHEMA = yup.string().trim().max(255).nullable();
 
-const ID_SCHEMA = yup.number().integer().positive().required();
+const ID_SCHEMA = yup.string().trim().required();
 
 // Entities schemas
 const BRAND_VALIDATION_SCHEMA = yup.object().shape({
@@ -30,12 +30,12 @@ const ITEM_TYPE_VALIDATION_SCHEMA = yup.object().shape({
 });
 
 const ITEM_VALIDATION_SCHEMA = yup.object().shape({
-    categoryId: ID_SCHEMA,
-    typeId: ID_SCHEMA,
-    brandId: ID_SCHEMA,
-    modelId: ID_SCHEMA,
+    categoryTitle: ID_SCHEMA,
+    typeTitle: ID_SCHEMA,
+    brandTitle: ID_SCHEMA,
+    modelTitle: ID_SCHEMA,
     price: yup.number().positive('Price must be a positive number').required(),
-    storeId: ID_SCHEMA,
+    storeTitle: ID_SCHEMA,
     amount: yup
         .number()
         .integer('Amount must be an integer')

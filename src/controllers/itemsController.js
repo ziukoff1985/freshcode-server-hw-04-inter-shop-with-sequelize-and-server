@@ -75,31 +75,34 @@ class ItemsController {
             const category = await ItemCategory.findOne({
                 where: { title: categoryTitle },
             });
-            const type = await ItemType.findOne({
-                where: { title: typeTitle },
-            });
-            const brand = await Brand.findOne({
-                where: { title: brandTitle },
-            });
-            const model = await Model.findOne({
-                where: { title: modelTitle },
-            });
-            const store = await Store.findOne({
-                where: { title: storeTitle },
-            });
-
             if (!category) {
                 return next(createError(404, 'Category not found'));
             }
+
+            const type = await ItemType.findOne({
+                where: { title: typeTitle },
+            });
             if (!type) {
                 return next(createError(404, 'Type not found'));
             }
+
+            const brand = await Brand.findOne({
+                where: { title: brandTitle },
+            });
             if (!brand) {
                 return next(createError(404, 'Brand not found'));
             }
+
+            const model = await Model.findOne({
+                where: { title: modelTitle },
+            });
             if (!model) {
                 return next(createError(404, 'Model not found'));
             }
+
+            const store = await Store.findOne({
+                where: { title: storeTitle },
+            });
             if (!store) {
                 return next(createError(404, 'Store not found'));
             }
