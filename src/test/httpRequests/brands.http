@@ -10,7 +10,7 @@ POST http://localhost:5000/api/brands HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Motorola",
+    "title": "Mo",
     "description": "Some description about Motorola"
 }
 
@@ -27,4 +27,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:5000/api/brands/21
+DELETE http://localhost:5000/api/brands/22
