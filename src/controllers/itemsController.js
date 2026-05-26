@@ -9,6 +9,14 @@ const {
     Store,
 } = require('../db/models/index');
 
+const itemIncludes = [
+    { model: ItemCategory, attributes: ['title'] },
+    { model: ItemType, attributes: ['title'] },
+    { model: Brand, attributes: ['title'] },
+    { model: Model, attributes: ['title'] },
+    { model: Store, attributes: ['title'] },
+];
+
 class ItemsController {
     async getAllItems(req, res, next) {
         try {
@@ -16,13 +24,7 @@ class ItemsController {
                 limit: 10,
                 order: [['id', 'ASC']],
                 attributes: ['id', 'price', 'amount'],
-                include: [
-                    { model: ItemCategory, attributes: ['title'] },
-                    { model: ItemType, attributes: ['title'] },
-                    { model: Brand, attributes: ['title'] },
-                    { model: Model, attributes: ['title'] },
-                    { model: Store, attributes: ['title'] },
-                ],
+                include: itemIncludes,
             });
             if (items.length === 0) {
                 return next(createError(404, 'Items not found'));
@@ -41,13 +43,7 @@ class ItemsController {
             const item = await Item.findOne({
                 where: { id },
                 attributes: ['id', 'price', 'amount'],
-                include: [
-                    { model: ItemCategory, attributes: ['title'] },
-                    { model: ItemType, attributes: ['title'] },
-                    { model: Brand, attributes: ['title'] },
-                    { model: Model, attributes: ['title'] },
-                    { model: Store, attributes: ['title'] },
-                ],
+                include: itemIncludes,
             });
             if (!item) {
                 return next(createError(404, 'Item not found'));
