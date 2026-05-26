@@ -11,8 +11,7 @@ Content-Type: application/json
 
 {
     "title": "Mavic 3",
-    "description": "Some description about Mavic 3",
-    "brandTitle": "Xiaomi"
+    "description": "Some description about Mavic 3"
 }
 
 ###

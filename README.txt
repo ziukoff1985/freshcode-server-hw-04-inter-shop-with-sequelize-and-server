@@ -89,3 +89,6 @@ npx sequelize-cli model:generate --name ItemsOrders --attributes "orderId:intege
     - index.js
     - errorHandler.mw.js
     - hashPassword.mw.js
+    - validate.mw.js
+27. В папці utils -> створюємо Файл validationSchemas.js -> в ньому прописуємо валідаційні схеми для кожної сутності
+28. В папці test -> створюємо папку httpRequests -> в ньому створюємо файли для запитів по кожній сутності
