@@ -51,14 +51,13 @@ const MODEL_VALIDATION_SCHEMA = yup.object().shape({
 
 const ORDER_VALIDATION_SCHEMA = yup.object().shape({
     code: TITLE_NAME_CODE_SCHEMA,
-    date: yup.date(),
-    amount: yup
-        .number()
-        .integer('Amount must be an integer')
-        .positive('Amount must be a positive number')
-        .required(),
     paid: yup.boolean(),
     customerName: REQUIRED_STRING_SCHEMA,
+    items: yup
+        .array()
+        .of(yup.number())
+        .min(1, 'Order must contain at least one item')
+        .required(),
 });
 
 const STORE_VALIDATION_SCHEMA = yup.object().shape({

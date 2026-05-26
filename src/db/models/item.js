@@ -50,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
             price: {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
+                get() {
+                    const value = this.getDataValue('price');
+                    return value === null ? null : parseFloat(value);
+                },
             },
             storeId: {
                 type: DataTypes.INTEGER,
