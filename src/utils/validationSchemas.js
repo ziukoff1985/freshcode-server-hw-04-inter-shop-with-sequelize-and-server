@@ -7,6 +7,11 @@ const DESCRIPTION_SCHEMA = yup.string().trim().max(255).nullable();
 
 const REQUIRED_STRING_SCHEMA = yup.string().trim().required();
 
+const PAGINATION_VALIDATION_SCHEMA = yup.object().shape({
+    limit: yup.number().integer().min(1).max(100).required(),
+    offset: yup.number().integer().min(0).required(),
+});
+
 // Entities schemas
 const BRAND_VALIDATION_SCHEMA = yup.object().shape({
     title: TITLE_NAME_CODE_SCHEMA,
@@ -65,6 +70,15 @@ const STORE_VALIDATION_SCHEMA = yup.object().shape({
     description: DESCRIPTION_SCHEMA,
 });
 
+// Specific schemas
+const BRAND_TITLES_SCHEMA = yup.object().shape({
+    brandTitles: yup
+        .array()
+        .of(yup.string().trim().min(1))
+        .min(1, 'At least one brand title is required')
+        .required('Brand titles are required'),
+});
+
 module.exports = {
     BRAND_VALIDATION_SCHEMA,
     CUSTOMER_VALIDATION_SCHEMA,
@@ -74,4 +88,6 @@ module.exports = {
     MODEL_VALIDATION_SCHEMA,
     ORDER_VALIDATION_SCHEMA,
     STORE_VALIDATION_SCHEMA,
+    PAGINATION_VALIDATION_SCHEMA,
+    BRAND_TITLES_SCHEMA,
 };
