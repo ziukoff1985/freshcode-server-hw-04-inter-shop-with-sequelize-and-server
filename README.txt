@@ -76,6 +76,9 @@ npx sequelize-cli model:generate --name ItemsOrders --attributes "orderId:intege
     - createBrand
     - updateBrand
     - deleteBrand
+    - deleteBrandsByTitles
+    - getBrandsByTitle
+    - getBrandsFromHalf
 25. По аналогії створюємо контролери для інших сутностей:
     - itemCategories
     - itemTypes
@@ -90,5 +93,6 @@ npx sequelize-cli model:generate --name ItemsOrders --attributes "orderId:intege
     - errorHandler.mw.js
     - hashPassword.mw.js
     - validate.mw.js
-27. В папці utils -> створюємо Файл validationSchemas.js -> в ньому прописуємо валідаційні схеми для кожної сутності
+    - pagination.mw.js
+27. В папці utils -> створюємо Файл validationSchemas.js -> в ньому прописуємо валідаційні схеми для кожної сутності, а також для специфічних запитів
 28. В папці test -> створюємо папку httpRequests -> в ньому створюємо файли для запитів по кожній сутності

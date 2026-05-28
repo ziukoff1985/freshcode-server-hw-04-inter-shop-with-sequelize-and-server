@@ -8,7 +8,7 @@ GET http://localhost:5000/api/brands/half
 
 ###
 
-# Get brands(array) by names
+# Get brands(array) by titles
 POST http://localhost:5000/api/brands/by-titles HTTP/1.1
 Content-Type: application/json
 

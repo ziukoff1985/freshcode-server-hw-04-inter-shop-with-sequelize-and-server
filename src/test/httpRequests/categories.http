@@ -1,11 +1,29 @@
+# Get all categories (only 10 items)
 GET http://localhost:5000/api/categories
 
 ###
 
+# Get all categories for IDs greater than half the total
+GET http://localhost:5000/api/categories/half
+
+###
+
+# Get categories(array) by titles
+POST http://localhost:5000/api/categories/by-titles HTTP/1.1
+Content-Type: application/json
+
+{
+    "values": ["Audio", "Furniture", "Tools"]
+}
+
+###
+
+# Get category by id
 GET http://localhost:5000/api/categories/2
 
 ###
 
+# Create new category
 POST http://localhost:5000/api/categories HTTP/1.1
 Content-Type: application/json
 
@@ -16,15 +34,27 @@ Content-Type: application/json
 
 ###
 
+# Update existing category by id
 PUT http://localhost:5000/api/categories HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 22,
+    "id": 23,
     "title": "Pet Accessories",
     "description": "Some description about Pet Accessories"
 }
 
 ###
 
-DELETE http://localhost:5000/api/categories/22
+# Delete category by id
+DELETE http://localhost:5000/api/categories/25
+
+###
+
+# Delete categories(array) by titles
+DELETE http://localhost:5000/api/categories/del-by-titles HTTP/1.1
+Content-Type: application/json
+
+{
+    "values": ["Drones", "Pet Accessories"]
+}
