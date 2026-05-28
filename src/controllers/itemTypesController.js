@@ -1,12 +1,17 @@
 const createError = require('http-errors');
+const { Op } = require('sequelize');
 
 const { ItemType } = require('../db/models/index');
 
 class ItemTypesController {
     async getAllTypes(req, res, next) {
         try {
+            const { limit, offset } = req.pagination;
+
             const types = await ItemType.findAll({
-                limit: 10,
+                raw: true,
+                limit,
+                offset,
                 order: [['id', 'ASC']],
             });
             if (types.length === 0) {
@@ -35,6 +40,69 @@ class ItemTypesController {
         }
     }
 
+    async getTypesFromHalf(req, res, next) {
+        try {
+            // get all ids from table
+            const allTypes = await ItemType.findAll({
+                attributes: ['id'],
+                order: [['id', 'ASC']],
+                raw: true,
+            });
+
+            if (allTypes.length === 0) {
+                return next(createError(404, 'Types not found'));
+            }
+
+            // find the index of the middle element of the array and get the actual ID from there.
+            const halfIndex = Math.floor(allTypes.length / 2);
+            const targetId = allTypes[halfIndex - 1].id;
+
+            // Select IDs that are greater than the average
+            const types = await ItemType.findAll({
+                where: {
+                    id: {
+                        [Op.gt]: targetId,
+                    },
+                },
+                order: [['id', 'ASC']],
+            });
+            console.log(
+                `Result from half (id > ${targetId}) is: ${JSON.stringify(types, null, 2)}`,
+            );
+            res.status(200).json(types);
+        } catch (error) {
+            console.log(error.message);
+            next(error);
+        }
+    }
+
+    async getTypesByTitle(req, res, next) {
+        try {
+            const { values } = req.body;
+
+            if (!values || !Array.isArray(values) || values.length === 0) {
+                return next(createError(400, 'Type titles are required'));
+            }
+
+            const types = await ItemType.findAll({
+                where: {
+                    title: {
+                        [Op.in]: values,
+                    },
+                },
+                order: [['id', 'ASC']],
+            });
+            if (types.length === 0) {
+                return next(createError(404, 'Types not found'));
+            }
+            console.log(`Result is: ${JSON.stringify(types, null, 2)}`);
+            res.status(200).json(types);
+        } catch (error) {
+            console.log(error.message);
+            next(error);
+        }
+    }
+
     async createType(req, res, next) {
         try {
             const { title, description } = req.body;
@@ -57,6 +125,36 @@ class ItemTypesController {
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Type deleted successfully',
+            });
+        } catch (error) {
+            console.log(error.message);
+            next(error);
+        }
+    }
+
+    async deleteTypesByTitles(req, res, next) {
+        try {
+            const { values } = req.body;
+
+            if (!values || !Array.isArray(values) || values.length === 0) {
+                return next(createError(400, 'Type titles are required'));
+            }
+
+            const deletedRows = await ItemType.destroy({
+                where: {
+                    title: {
+                        [Op.in]: values,
+                    },
+                },
+            });
+
+            if (deletedRows === 0) {
+                return next(createError(404, 'Types not found'));
+            }
+
+            console.log(`Deleted rows: ${deletedRows}`);
+            res.status(200).json({
+                message: 'Types deleted successfully',
             });
         } catch (error) {
             console.log(error.message);
