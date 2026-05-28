@@ -7,7 +7,6 @@ class BrandsController {
     async getAllBrands(req, res, next) {
         try {
             const { limit, offset } = req.pagination;
-            console.log(`limit: ${limit}, offset: ${offset}`);
             const brands = await Brand.findAll({
                 raw: true,
                 limit,
@@ -92,7 +91,6 @@ class BrandsController {
                 },
                 order: [['id', 'ASC']],
             });
-
             console.log(
                 `Result from half (id > ${targetId}) is: ${JSON.stringify(brands, null, 2)}`,
             );
@@ -105,20 +103,16 @@ class BrandsController {
 
     async getBrandsByTitle(req, res, next) {
         try {
-            const { brandTitles } = req.body;
+            const { values } = req.body;
 
-            if (
-                !brandTitles ||
-                !Array.isArray(brandTitles) ||
-                brandTitles.length === 0
-            ) {
+            if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Brand titles are required'));
             }
 
             const brands = await Brand.findAll({
                 where: {
                     title: {
-                        [Op.in]: brandTitles,
+                        [Op.in]: values,
                     },
                 },
                 order: [['id', 'ASC']],
@@ -165,20 +159,16 @@ class BrandsController {
 
     async deleteBrandsByTitles(req, res, next) {
         try {
-            const { brandTitles } = req.body;
+            const { values } = req.body;
 
-            if (
-                !brandTitles ||
-                !Array.isArray(brandTitles) ||
-                brandTitles.length === 0
-            ) {
+            if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Brand titles are required'));
             }
 
             const deletedRows = await Brand.destroy({
                 where: {
                     title: {
-                        [Op.in]: brandTitles,
+                        [Op.in]: values,
                     },
                 },
             });

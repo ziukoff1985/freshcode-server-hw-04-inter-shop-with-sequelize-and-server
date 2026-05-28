@@ -71,13 +71,23 @@ const STORE_VALIDATION_SCHEMA = yup.object().shape({
 });
 
 // Specific schemas
-const BRAND_TITLES_SCHEMA = yup.object().shape({
-    brandTitles: yup
+const BULK_FIND_SCHEMA = yup.object().shape({
+    values: yup
         .array()
         .of(yup.string().trim().min(1))
-        .min(1, 'At least one brand title is required')
-        .required('Brand titles are required'),
+        .min(1, 'At least one value is required')
+        .required('Values are required'),
 });
+
+// const createArrayOfStringsSchema = (fieldName, minLength = 1) => {
+//     return yup.object().shape({
+//         [fieldName]: yup
+//             .array()
+//             .of(yup.string().trim().min(1))
+//             .min(minLength, `At least ${minLength} ${fieldName} is required`)
+//             .required(`${fieldName} is required`),
+//     });
+// };
 
 module.exports = {
     BRAND_VALIDATION_SCHEMA,
@@ -89,5 +99,7 @@ module.exports = {
     ORDER_VALIDATION_SCHEMA,
     STORE_VALIDATION_SCHEMA,
     PAGINATION_VALIDATION_SCHEMA,
-    BRAND_TITLES_SCHEMA,
+    BULK_FIND_SCHEMA,
+    // BRAND_TITLES_SCHEMA: createArrayOfStringsSchema('brandTitles'),
+    // CUSTOMER_NAMES_SCHEMA: createArrayOfStringsSchema('customerNames'),
 };

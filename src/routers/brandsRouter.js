@@ -4,7 +4,7 @@ const brandsController = require('../controllers/brandsController');
 const { validateBody, paginate } = require('../middleware/index');
 const {
     BRAND_VALIDATION_SCHEMA,
-    BRAND_TITLES_SCHEMA,
+    BULK_FIND_SCHEMA,
 } = require('../utils/validationSchemas');
 // -------------------------------
 const router = new Router();
@@ -19,12 +19,12 @@ router.route('/half').get(brandsController.getBrandsFromHalf);
 
 router
     .route('/by-titles')
-    .post(validateBody(BRAND_TITLES_SCHEMA), brandsController.getBrandsByTitle);
+    .post(validateBody(BULK_FIND_SCHEMA), brandsController.getBrandsByTitle);
 
 router
     .route('/del-by-titles')
     .delete(
-        validateBody(BRAND_TITLES_SCHEMA),
+        validateBody(BULK_FIND_SCHEMA),
         brandsController.deleteBrandsByTitles,
     );
 
