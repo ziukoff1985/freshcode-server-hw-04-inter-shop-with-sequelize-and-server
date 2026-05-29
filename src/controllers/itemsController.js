@@ -52,7 +52,7 @@ class ItemsController {
         try {
             const { limit, offset } = req.pagination;
             const items = await Item.findAll({
-                raw: true,
+                // raw: true,
                 limit,
                 offset,
                 attributes: ['id', 'price', 'amount'],
@@ -74,7 +74,7 @@ class ItemsController {
         try {
             const { id } = req.params;
             const item = await Item.findOne({
-                raw: true,
+                // raw: true,
                 where: { id },
                 attributes: ['id', 'price', 'amount'],
                 include: itemIncludes,
@@ -96,7 +96,7 @@ class ItemsController {
             const allItems = await Item.findAll({
                 attributes: ['id'],
                 order: [['id', 'ASC']],
-                raw: true,
+                // raw: true,
             });
 
             if (allItems.length === 0) {
@@ -159,7 +159,7 @@ class ItemsController {
                         [Op.in]: brandIds,
                     },
                 },
-                raw: true,
+                // raw: true,
                 order: [['id', 'ASC']],
             });
             if (items.length === 0) {

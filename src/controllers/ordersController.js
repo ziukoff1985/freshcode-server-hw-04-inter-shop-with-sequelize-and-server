@@ -1,13 +1,17 @@
 const createError = require('http-errors');
+const { Op } = require('sequelize');
 
 const { Order, Customer, Item } = require('../db/models/index');
 
 class OrdersController {
     async getAllOrders(req, res, next) {
         try {
+            const { limit, offset } = req.pagination;
             const orders = await Order.findAll({
-                limit: 10,
-                order: [['id', 'ASC']],
+                attributes: ['id', 'code', 'paid', 'date', 'amount'],
+                // raw: true,
+                limit,
+                offset,
                 include: [
                     { model: Customer, attributes: ['name'] },
                     {
@@ -16,6 +20,7 @@ class OrdersController {
                         through: { attributes: [] },
                     },
                 ],
+                order: [['id', 'ASC']],
             });
             if (orders.length === 0) {
                 return next(createError(404, 'Orders not found'));
@@ -33,7 +38,9 @@ class OrdersController {
             const { id } = req.params;
 
             const order = await Order.findOne({
+                // raw: true,
                 where: { id },
+                attributes: ['id', 'code', 'paid', 'date', 'amount'],
                 include: [
                     { model: Customer, attributes: ['name'] },
                     {
@@ -49,6 +56,106 @@ class OrdersController {
             }
             console.log(`Result is: ${JSON.stringify(order, null, 2)}`);
             res.status(200).json(order);
+        } catch (error) {
+            console.log(error.message);
+            next(error);
+        }
+    }
+
+    async getOrdersFromHalf(req, res, next) {
+        try {
+            // get all ids from table
+            const allOrders = await Order.findAll({
+                attributes: ['id'],
+                order: [['id', 'ASC']],
+                raw: true,
+            });
+
+            if (allOrders.length === 0) {
+                return next(createError(404, 'Orders not found'));
+            }
+
+            // find the index of the middle element of the array and get the actual ID from there.
+            const halfIndex = Math.floor(allOrders.length / 2);
+            const targetId =
+                halfIndex > 0 ? allOrders[halfIndex - 1].id : allOrders[0].id;
+
+            // Select IDs that are greater than the average
+            const orders = await Order.findAll({
+                attributes: ['id', 'code', 'paid', 'date', 'amount'],
+                include: [
+                    { model: Customer, attributes: ['name'] },
+                    {
+                        model: Item,
+                        attributes: ['id', 'price'],
+                        through: { attributes: [] },
+                    },
+                ],
+                where: {
+                    id: {
+                        [Op.gt]: targetId,
+                    },
+                },
+                // raw: true,
+                order: [['id', 'ASC']],
+            });
+
+            console.log(
+                `Result from half (id > ${targetId}) is: ${JSON.stringify(orders, null, 2)}`,
+            );
+            res.status(200).json(orders);
+        } catch (error) {
+            console.log(error.message);
+            next(error);
+        }
+    }
+
+    async getOrdersByCustomer(req, res, next) {
+        try {
+            const { values } = req.body;
+
+            if (!values || !Array.isArray(values) || values.length === 0) {
+                return next(createError(400, 'Customer names are required'));
+            }
+
+            const customers = await Customer.findAll({
+                attributes: ['id'],
+                where: {
+                    name: {
+                        [Op.in]: values,
+                    },
+                },
+                order: [['id', 'ASC']],
+            });
+            if (customers.length === 0) {
+                return next(createError(404, 'Customers not found'));
+            }
+
+            const customerIds = customers.map((customer) => customer.id);
+
+            const orders = await Order.findAll({
+                attributes: ['id', 'code', 'paid', 'date', 'amount'],
+                include: [
+                    { model: Customer, attributes: ['name'] },
+                    {
+                        model: Item,
+                        attributes: ['id', 'price'],
+                        through: { attributes: [] },
+                    },
+                ],
+                where: {
+                    customerId: {
+                        [Op.in]: customerIds,
+                    },
+                },
+                // raw: true,
+                order: [['id', 'ASC']],
+            });
+            if (orders.length === 0) {
+                return next(createError(404, 'Orders not found'));
+            }
+            console.log(`Result is: ${JSON.stringify(orders, null, 2)}`);
+            res.status(200).json(orders);
         } catch (error) {
             console.log(error.message);
             next(error);
@@ -82,13 +189,11 @@ class OrdersController {
                     createError(404, 'One or more items not found in database'),
                 );
             }
-            console.log('dbItems:', dbItems);
 
             const totalAmount = dbItems.reduce(
                 (sum, item) => sum + Number(item.price),
                 0,
             );
-            console.log('totalAmount:', totalAmount);
 
             // 4. Створюємо замовлення
             const order = await Order.create({
@@ -104,6 +209,7 @@ class OrdersController {
 
             // Повертаємо замовлення разом із підтягнутими товарами для красивої відповіді клієнту
             const fullOrder = await Order.findByPk(order.id, {
+                attributes: ['id', 'code', 'paid', 'date', 'amount'],
                 include: [
                     { model: Customer, attributes: ['name'] },
                     {
@@ -160,6 +266,51 @@ class OrdersController {
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Order deleted successfully',
+            });
+        } catch (error) {
+            console.log(error.message);
+            next(error);
+        }
+    }
+
+    async deleteOrdersByCustomer(req, res, next) {
+        try {
+            const { values } = req.body;
+
+            if (!values || !Array.isArray(values) || values.length === 0) {
+                return next(createError(400, 'Customer names are required'));
+            }
+
+            const customers = await Customer.findAll({
+                attributes: ['id', 'name'],
+                where: {
+                    name: {
+                        [Op.in]: values,
+                    },
+                },
+                order: [['id', 'ASC']],
+            });
+            if (customers.length === 0) {
+                return next(createError(404, 'Customers not found'));
+            }
+
+            const customerIds = customers.map((customer) => customer.id);
+
+            const deletedRows = await Order.destroy({
+                where: {
+                    customerId: {
+                        [Op.in]: customerIds,
+                    },
+                },
+            });
+
+            if (deletedRows === 0) {
+                return next(createError(404, 'Orders not found'));
+            }
+
+            console.log(`Deleted rows: ${deletedRows}`);
+            res.status(200).json({
+                message: 'Orders deleted successfully',
             });
         } catch (error) {
             console.log(error.message);

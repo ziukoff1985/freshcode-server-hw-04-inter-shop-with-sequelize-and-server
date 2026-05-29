@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
                 through: models.ItemsOrders,
                 foreignKey: 'orderId',
                 otherKey: 'itemId',
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             });
         }
     }

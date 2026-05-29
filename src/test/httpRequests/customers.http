@@ -28,8 +28,8 @@ POST http://localhost:5000/api/customers HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Tony Stark",
-    "email": "tony@test.com",
+    "name": "Boris Ziukov",
+    "email": "boris@test.com",
     "password": "123456"
 }
 

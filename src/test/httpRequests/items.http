@@ -57,7 +57,7 @@ Content-Type: application/json
 ###
 
 # Delete item by id
-DELETE http://localhost:5000/api/items/63
+DELETE http://localhost:5000/api/items/7
 
 ###
 

@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
                 through: models.ItemsOrders,
                 foreignKey: 'itemId',
                 otherKey: 'orderId',
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
             });
         }
     }
