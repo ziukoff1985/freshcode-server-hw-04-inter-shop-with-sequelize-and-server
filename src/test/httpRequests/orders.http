@@ -31,7 +31,7 @@ Content-Type: application/json
     "code": "ORD-ZZZ-2",
     "paid": true,
     "customerName": "Boris Ziukov",
-    "items": [41, 41]
+    "items": [41, 42, 43, 46, 47]
 }
 
 ###

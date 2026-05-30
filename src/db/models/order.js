@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
             amount: {
                 type: DataTypes.DECIMAL,
                 allowNull: false,
+                get() {
+                    const value = this.getDataValue('amount');
+                    return value === null ? null : parseFloat(value);
+                },
             },
             paid: {
                 type: DataTypes.BOOLEAN,
