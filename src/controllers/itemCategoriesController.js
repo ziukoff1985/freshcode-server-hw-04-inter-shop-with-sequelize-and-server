@@ -28,7 +28,9 @@ class ItemCategoriesController {
     async getCategoryById(req, res, next) {
         try {
             const { id } = req.params;
-            const category = await ItemCategory.findByPk(id);
+            const category = await ItemCategory.findByPk(id, {
+                raw: true,
+            });
             if (!category) {
                 return next(createError(404, 'Category not found'));
             }
@@ -55,7 +57,10 @@ class ItemCategoriesController {
 
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allCategories.length / 2);
-            const targetId = allCategories[halfIndex - 1].id;
+            const targetId =
+                halfIndex > 0
+                    ? allCategories[halfIndex - 1].id
+                    : allCategories[0].id;
 
             // Select IDs that are greater than the average
             const categories = await ItemCategory.findAll({
@@ -64,6 +69,7 @@ class ItemCategoriesController {
                         [Op.gt]: targetId,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             console.log(
@@ -90,6 +96,7 @@ class ItemCategoriesController {
                         [Op.in]: values,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             if (categories.length === 0) {

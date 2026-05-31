@@ -28,7 +28,9 @@ class ItemTypesController {
     async getTypeById(req, res, next) {
         try {
             const { id } = req.params;
-            const type = await ItemType.findByPk(id);
+            const type = await ItemType.findByPk(id, {
+                raw: true,
+            });
             if (!type) {
                 return next(createError(404, 'Type not found'));
             }
@@ -55,7 +57,8 @@ class ItemTypesController {
 
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allTypes.length / 2);
-            const targetId = allTypes[halfIndex - 1].id;
+            const targetId =
+                halfIndex > 0 ? allTypes[halfIndex - 1].id : allTypes[0].id;
 
             // Select IDs that are greater than the average
             const types = await ItemType.findAll({
@@ -64,6 +67,7 @@ class ItemTypesController {
                         [Op.gt]: targetId,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             console.log(
@@ -90,6 +94,7 @@ class ItemTypesController {
                         [Op.in]: values,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             if (types.length === 0) {

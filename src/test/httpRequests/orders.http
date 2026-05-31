@@ -13,13 +13,13 @@ POST http://localhost:5000/api/orders/by-customers HTTP/1.1
 Content-Type: application/json
 
 {
-    "values": ["Sarah Taylor", "William Garcia"]
+    "values": ["Jessica Lee", "Karen White"]
 }
 
 ###
 
 # Get order by id
-GET http://localhost:5000/api/orders/82
+GET http://localhost:5000/api/orders/18
 
 ###
 
@@ -41,16 +41,16 @@ PUT http://localhost:5000/api/orders HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 80,
+    "id": 92,
     "code": "ORD-ZZZ-1",
-    "paid": true,
+    "paid": false,
     "customerName": "Boris Ziukov",
-    "items": [41, 42, 43, 46, 47]
+    "items": [1, 2, 3, 4, 5]
 }
 ###
 
 # Delete order by id
-DELETE http://localhost:5000/api/orders/77
+DELETE http://localhost:5000/api/orders/92
 
 ###
 
@@ -59,5 +59,5 @@ DELETE http://localhost:5000/api/orders/del-by-customers
 Content-Type: application/json
 
 {
-  "values": ["Boris Ziukov", "William Garcia"]
+  "values": ["Boris Ziukov"]
 }

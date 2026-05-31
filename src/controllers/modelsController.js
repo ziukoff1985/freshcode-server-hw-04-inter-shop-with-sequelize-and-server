@@ -2,7 +2,6 @@ const createError = require('http-errors');
 const { Op } = require('sequelize');
 
 const { Model, Brand } = require('../db/models/index');
-const { raw } = require('express');
 
 class ModelsController {
     async getAllModels(req, res, next) {
@@ -11,7 +10,6 @@ class ModelsController {
             const models = await Model.findAll({
                 attributes: ['id', 'title', 'description'],
                 include: [{ model: Brand, attributes: ['title'] }],
-                raw: true,
                 limit,
                 offset,
                 order: [['id', 'ASC']],
@@ -34,7 +32,6 @@ class ModelsController {
                 where: { id },
                 attributes: ['id', 'title', 'description'],
                 include: [{ model: Brand, attributes: ['title'] }],
-                raw: true,
             });
             if (!model) {
                 return next(createError(404, 'Model not found'));
@@ -62,7 +59,8 @@ class ModelsController {
 
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allModels.length / 2);
-            const targetId = allModels[halfIndex - 1].id;
+            const targetId =
+                halfIndex > 0 ? allModels[halfIndex - 1].id : allModels[0].id;
 
             // Select IDs that are greater than the average
             const models = await Model.findAll({
@@ -73,7 +71,6 @@ class ModelsController {
                         [Op.gt]: targetId,
                     },
                 },
-                raw: true,
                 order: [['id', 'ASC']],
             });
 
@@ -103,7 +100,6 @@ class ModelsController {
                         [Op.in]: values,
                     },
                 },
-                raw: true,
                 order: [['id', 'ASC']],
             });
             if (models.length === 0) {

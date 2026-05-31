@@ -9,7 +9,6 @@ class OrdersController {
             const { limit, offset } = req.pagination;
             const orders = await Order.findAll({
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
-                // raw: true,
                 limit,
                 offset,
                 include: [
@@ -38,7 +37,6 @@ class OrdersController {
             const { id } = req.params;
 
             const order = await Order.findOne({
-                // raw: true,
                 where: { id },
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
                 include: [
@@ -96,7 +94,6 @@ class OrdersController {
                         [Op.gt]: targetId,
                     },
                 },
-                // raw: true,
                 order: [['id', 'ASC']],
             });
 
@@ -125,6 +122,7 @@ class OrdersController {
                         [Op.in]: values,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             if (customers.length === 0) {
@@ -148,7 +146,6 @@ class OrdersController {
                         [Op.in]: customerIds,
                     },
                 },
-                // raw: true,
                 order: [['id', 'ASC']],
             });
             if (orders.length === 0) {
@@ -166,7 +163,6 @@ class OrdersController {
         try {
             const { code, paid, customerName, items } = req.body;
 
-            // 1. Перевіряємо клієнта
             const customer = await Customer.findOne({
                 where: { name: customerName },
             });
@@ -174,15 +170,12 @@ class OrdersController {
                 return next(createError(404, 'Customer not found'));
             }
 
-            // 2. Якщо масив товарів порожній або не переданий — це помилка
             if (!items || !Array.isArray(items) || items.length === 0) {
                 return next(
                     createError(400, 'Order must contain at least one item'),
                 );
             }
 
-            // 3. Рахуємо загальну суму замовлення (amount) автоматично на основі цін товарів в БД!
-            // Це набагато безпечніше, ніж вірити сумі, яку прислав фронтенд.
             const dbItems = await Item.findAll({ where: { id: items } });
             if (dbItems.length !== items.length) {
                 return next(
@@ -190,6 +183,7 @@ class OrdersController {
                 );
             }
 
+            // Рахуємо загальну суму замовлення (amount) автоматично на основі цін товарів в БД!
             const totalAmount = dbItems.reduce(
                 (sum, item) => sum + Number(item.price),
                 0,
@@ -229,32 +223,6 @@ class OrdersController {
             next(error);
         }
     }
-
-    // async createOrder(req, res, next) {
-    //     try {
-    //         const { code, amount, paid, customerName } = req.body;
-    //         const customer = await Customer.findOne({
-    //             where: { name: customerName },
-    //         });
-
-    //         if (!customer) {
-    //             return next(createError(404, 'Customer not found'));
-    //         }
-
-    //         const order = await Order.create({
-    //             code,
-    //             amount,
-    //             paid,
-    //             customerId: customer.id,
-    //         });
-
-    //         console.log(`Result is: ${JSON.stringify(order, null, 2)}`);
-    //         res.status(201).json(order);
-    //     } catch (error) {
-    //         console.log(error.message);
-    //         next(error);
-    //     }
-    // }
 
     async deleteOrder(req, res, next) {
         try {
@@ -380,38 +348,6 @@ class OrdersController {
             next(error);
         }
     }
-
-    // async updateOrder(req, res, next) {
-    //     try {
-    //         const { id, customerName, ...restUpdateData } = req.body;
-
-    //         const customer = await Customer.findOne({
-    //             where: { name: customerName },
-    //         });
-
-    //         if (!customer) {
-    //             return next(createError(404, 'Customer not found'));
-    //         }
-
-    //         const order = await Order.findOne({
-    //             where: { id },
-    //         });
-    //         if (!order) {
-    //             return next(createError(404, 'Order not found'));
-    //         }
-
-    //         await order.update({
-    //             ...restUpdateData,
-    //             customerId: customer.id,
-    //         });
-
-    //         console.log(`Result is: ${JSON.stringify(order, null, 2)}`);
-    //         res.status(200).json(order);
-    //     } catch (error) {
-    //         console.log(error.message);
-    //         next(error);
-    //     }
-    // }
 }
 
 module.exports = new OrdersController();

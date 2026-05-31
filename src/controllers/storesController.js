@@ -27,7 +27,9 @@ class StoresController {
     async getStoreById(req, res, next) {
         try {
             const { id } = req.params;
-            const store = await Store.findByPk(id);
+            const store = await Store.findByPk(id, {
+                raw: true,
+            });
             if (!store) {
                 return next(createError(404, 'Store not found'));
             }
@@ -54,7 +56,8 @@ class StoresController {
 
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allStores.length / 2);
-            const targetId = allStores[halfIndex - 1].id;
+            const targetId =
+                halfIndex > 0 ? allStores[halfIndex - 1].id : allStores[0].id;
 
             // Select IDs that are greater than the average
             const stores = await Store.findAll({
@@ -63,6 +66,7 @@ class StoresController {
                         [Op.gt]: targetId,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             console.log(
@@ -89,6 +93,7 @@ class StoresController {
                         [Op.in]: values,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             if (stores.length === 0) {

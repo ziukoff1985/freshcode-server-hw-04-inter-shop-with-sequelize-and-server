@@ -27,7 +27,9 @@ class CustomersController {
     async getCustomerById(req, res, next) {
         try {
             const { id } = req.params;
-            const customer = await Customer.findByPk(id);
+            const customer = await Customer.findByPk(id, {
+                raw: true,
+            });
             if (!customer) {
                 return next(createError(404, 'Customer not found'));
             }
@@ -50,7 +52,10 @@ class CustomersController {
 
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allCustomers.length / 2);
-            const targetId = allCustomers[halfIndex - 1].id;
+            const targetId =
+                halfIndex > 0
+                    ? allCustomers[halfIndex - 1].id
+                    : allCustomers[0].id;
 
             // Select IDs that are greater than the average
             const customers = await Customer.findAll({
@@ -59,6 +64,7 @@ class CustomersController {
                         [Op.gt]: targetId,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
 
@@ -86,6 +92,7 @@ class CustomersController {
                         [Op.in]: values,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             if (customers.length === 0) {

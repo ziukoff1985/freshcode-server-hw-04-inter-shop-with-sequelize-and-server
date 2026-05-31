@@ -27,7 +27,9 @@ class BrandsController {
     async getBrandById(req, res, next) {
         try {
             const { id } = req.params;
-            const brand = await Brand.findByPk(id);
+            const brand = await Brand.findByPk(id, {
+                raw: true,
+            });
             if (!brand) {
                 return next(createError(404, 'Brand not found'));
             }
@@ -38,32 +40,6 @@ class BrandsController {
             next(error);
         }
     }
-
-    // async getBrandsFromHalf(req, res, next) {
-    //     try {
-    //         const totalBrands = await Brand.count();
-    //         const halfCount = Math.floor(totalBrands / 2);
-
-    //         const brands = await Brand.findAll({
-    //             where: {
-    //                 id: {
-    //                     [Op.gt]: halfCount,
-    //                 },
-    //             },
-    //             order: [['id', 'ASC']],
-    //         });
-
-    //         if (brands.length === 0) {
-    //             return next(createError(404, 'Brands not found'));
-    //         }
-
-    //         console.log(`Result is: ${JSON.stringify(brands, null, 2)}`);
-    //         res.status(200).json(brands);
-    //     } catch (error) {
-    //         console.log(error.message);
-    //         next(error);
-    //     }
-    // }
 
     async getBrandsFromHalf(req, res, next) {
         try {
@@ -80,7 +56,8 @@ class BrandsController {
 
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allBrands.length / 2);
-            const targetId = allBrands[halfIndex - 1].id;
+            const targetId =
+                halfIndex > 0 ? allBrands[halfIndex - 1].id : allBrands[0].id;
 
             // Select IDs that are greater than the average
             const brands = await Brand.findAll({
@@ -89,6 +66,7 @@ class BrandsController {
                         [Op.gt]: targetId,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             console.log(
@@ -115,6 +93,7 @@ class BrandsController {
                         [Op.in]: values,
                     },
                 },
+                raw: true,
                 order: [['id', 'ASC']],
             });
             if (brands.length === 0) {
