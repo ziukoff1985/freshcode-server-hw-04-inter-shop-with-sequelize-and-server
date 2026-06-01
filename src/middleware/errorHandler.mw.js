@@ -20,12 +20,12 @@ const errorHandler = (err, req, res, next) => {
         return;
     }
 
-    if (err.code === '23505') {
+    if (err.name === 'SequelizeUniqueConstraintError') {
         return res.status(409).send({
             errors: [
                 {
                     title: 'Duplicate Error',
-                    detail: err.detail,
+                    detail: err?.original?.detail,
                 },
             ],
         });

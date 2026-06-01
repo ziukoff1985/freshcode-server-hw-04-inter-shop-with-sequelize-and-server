@@ -16,7 +16,7 @@ module.exports = {
             email: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: 'customers_email_unique',
+                // unique: 'customers_email_unique',
             },
             password: {
                 type: Sequelize.STRING,
@@ -30,6 +30,11 @@ module.exports = {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             },
+        });
+        await queryInterface.addConstraint('customers', {
+            fields: ['email'],
+            type: 'unique',
+            name: 'customers_email_unique',
         });
     },
     async down(queryInterface, Sequelize) {
