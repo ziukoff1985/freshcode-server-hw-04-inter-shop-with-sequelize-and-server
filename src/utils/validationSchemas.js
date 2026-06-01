@@ -79,16 +79,6 @@ const BULK_FIND_SCHEMA = yup.object().shape({
         .required('Values are required'),
 });
 
-// const createArrayOfStringsSchema = (fieldName, minLength = 1) => {
-//     return yup.object().shape({
-//         [fieldName]: yup
-//             .array()
-//             .of(yup.string().trim().min(1))
-//             .min(minLength, `At least ${minLength} ${fieldName} is required`)
-//             .required(`${fieldName} is required`),
-//     });
-// };
-
 module.exports = {
     BRAND_VALIDATION_SCHEMA,
     CUSTOMER_VALIDATION_SCHEMA,
@@ -100,6 +90,4 @@ module.exports = {
     STORE_VALIDATION_SCHEMA,
     PAGINATION_VALIDATION_SCHEMA,
     BULK_FIND_SCHEMA,
-    // BRAND_TITLES_SCHEMA: createArrayOfStringsSchema('brandTitles'),
-    // CUSTOMER_NAMES_SCHEMA: createArrayOfStringsSchema('customerNames'),
 };
