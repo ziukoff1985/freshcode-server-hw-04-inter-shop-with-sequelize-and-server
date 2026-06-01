@@ -28,7 +28,7 @@ POST http://localhost:5000/api/brands HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "CNC",
+    "title": "ENEXT",
     "description": "Some description about CNC"
 }
 
@@ -39,7 +39,7 @@ PUT http://localhost:5000/api/brands HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 43,
+    "id": 21,
     "title": "Acer",
     "description": "Some description about Acer"
 }
@@ -47,7 +47,7 @@ Content-Type: application/json
 ###
 
 # Delete brand by id
-DELETE http://localhost:5000/api/brands/42
+DELETE http://localhost:5000/api/brands/20
 
 ###
 

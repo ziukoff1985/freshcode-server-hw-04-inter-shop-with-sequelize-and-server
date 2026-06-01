@@ -52,16 +52,13 @@ class ModelsController {
                 order: [['id', 'ASC']],
                 raw: true,
             });
-
             if (allModels.length === 0) {
                 return next(createError(404, 'Models not found'));
             }
-
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allModels.length / 2);
             const targetId =
                 halfIndex > 0 ? allModels[halfIndex - 1].id : allModels[0].id;
-
             // Select IDs that are greater than the average
             const models = await Model.findAll({
                 attributes: ['id', 'title', 'description'],
@@ -73,7 +70,6 @@ class ModelsController {
                 },
                 order: [['id', 'ASC']],
             });
-
             console.log(
                 `Result from half (id > ${targetId}) is: ${JSON.stringify(models, null, 2)}`,
             );
@@ -87,11 +83,9 @@ class ModelsController {
     async getModelsByTitle(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Brand titles are required'));
             }
-
             const models = await Model.findAll({
                 attributes: ['id', 'title', 'description'],
                 include: [{ model: Brand, attributes: ['title'] }],
@@ -153,11 +147,9 @@ class ModelsController {
     async deleteModelsByTitles(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Model titles are required'));
             }
-
             const deletedRows = await Model.destroy({
                 where: {
                     title: {
@@ -165,11 +157,9 @@ class ModelsController {
                     },
                 },
             });
-
             if (deletedRows === 0) {
                 return next(createError(404, 'Models not found'));
             }
-
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Models deleted successfully',

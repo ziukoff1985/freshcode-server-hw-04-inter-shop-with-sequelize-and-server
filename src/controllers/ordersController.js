@@ -35,7 +35,6 @@ class OrdersController {
     async getOrderById(req, res, next) {
         try {
             const { id } = req.params;
-
             const order = await Order.findOne({
                 where: { id },
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
@@ -48,7 +47,6 @@ class OrdersController {
                     },
                 ],
             });
-
             if (!order) {
                 return next(createError(404, 'Order not found'));
             }
@@ -68,16 +66,13 @@ class OrdersController {
                 order: [['id', 'ASC']],
                 raw: true,
             });
-
             if (allOrders.length === 0) {
                 return next(createError(404, 'Orders not found'));
             }
-
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allOrders.length / 2);
             const targetId =
                 halfIndex > 0 ? allOrders[halfIndex - 1].id : allOrders[0].id;
-
             // Select IDs that are greater than the average
             const orders = await Order.findAll({
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
@@ -96,7 +91,6 @@ class OrdersController {
                 },
                 order: [['id', 'ASC']],
             });
-
             console.log(
                 `Result from half (id > ${targetId}) is: ${JSON.stringify(orders, null, 2)}`,
             );
@@ -110,11 +104,9 @@ class OrdersController {
     async getOrdersByCustomer(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Customer names are required'));
             }
-
             const customers = await Customer.findAll({
                 attributes: ['id'],
                 where: {
@@ -128,9 +120,7 @@ class OrdersController {
             if (customers.length === 0) {
                 return next(createError(404, 'Customers not found'));
             }
-
             const customerIds = customers.map((customer) => customer.id);
-
             const orders = await Order.findAll({
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
                 include: [
@@ -162,33 +152,28 @@ class OrdersController {
     async createOrder(req, res, next) {
         try {
             const { code, paid, customerName, items } = req.body;
-
             const customer = await Customer.findOne({
                 where: { name: customerName },
             });
             if (!customer) {
                 return next(createError(404, 'Customer not found'));
             }
-
             if (!items || !Array.isArray(items) || items.length === 0) {
                 return next(
                     createError(400, 'Order must contain at least one item'),
                 );
             }
-
             const dbItems = await Item.findAll({ where: { id: items } });
             if (dbItems.length !== items.length) {
                 return next(
                     createError(404, 'One or more items not found in database'),
                 );
             }
-
             // Рахуємо загальну суму замовлення (amount) автоматично на основі цін товарів в БД!
             const totalAmount = dbItems.reduce(
                 (sum, item) => sum + Number(item.price),
                 0,
             );
-
             // 4. Створюємо замовлення
             const order = await Order.create({
                 code,
@@ -196,11 +181,9 @@ class OrdersController {
                 paid,
                 customerId: customer.id,
             });
-
             // 5. МАГІЯ SEQUELIZE: додаємо зв'язки в таблицю items_orders
             // Метод addItems з'являється автоматично, якщо налаштовано Order.belongsToMany(Item)
             await order.addItems(items);
-
             // Повертаємо замовлення разом із підтягнутими товарами для красивої відповіді клієнту
             const fullOrder = await Order.findByPk(order.id, {
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
@@ -213,7 +196,6 @@ class OrdersController {
                     },
                 ],
             });
-
             console.log(
                 `Order created with items: ${JSON.stringify(fullOrder, null, 2)}`,
             );
@@ -244,11 +226,9 @@ class OrdersController {
     async deleteOrdersByCustomer(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Customer names are required'));
             }
-
             const customers = await Customer.findAll({
                 attributes: ['id', 'name'],
                 where: {
@@ -261,9 +241,7 @@ class OrdersController {
             if (customers.length === 0) {
                 return next(createError(404, 'Customers not found'));
             }
-
             const customerIds = customers.map((customer) => customer.id);
-
             const deletedRows = await Order.destroy({
                 where: {
                     customerId: {
@@ -271,11 +249,9 @@ class OrdersController {
                     },
                 },
             });
-
             if (deletedRows === 0) {
                 return next(createError(404, 'Orders not found'));
             }
-
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Orders deleted successfully',
@@ -289,45 +265,37 @@ class OrdersController {
     async updateOrder(req, res, next) {
         try {
             const { id, customerName, items, ...restUpdateData } = req.body;
-
             const customer = await Customer.findOne({
                 where: { name: customerName },
             });
             if (!customer) {
                 return next(createError(404, 'Customer not found'));
             }
-
             if (!items || !Array.isArray(items) || items.length === 0) {
                 return next(
                     createError(400, 'Order must contain at least one item'),
                 );
             }
-
             const dbItems = await Item.findAll({ where: { id: items } });
             if (dbItems.length !== items.length) {
                 return next(
                     createError(404, 'One or more items not found in database'),
                 );
             }
-
             const totalAmount = dbItems.reduce(
                 (sum, item) => sum + Number(item.price),
                 0,
             );
-
             const order = await Order.findOne({ where: { id } });
             if (!order) {
                 return next(createError(404, 'Order not found'));
             }
-
             await order.update({
                 ...restUpdateData,
                 amount: totalAmount,
                 customerId: customer.id,
             });
-
             await order.setItems(items);
-
             const fullOrder = await Order.findByPk(order.id, {
                 include: [
                     { model: Customer, attributes: ['name'] },
@@ -338,7 +306,6 @@ class OrdersController {
                     },
                 ],
             });
-
             console.log(
                 `Order updated with items: ${JSON.stringify(fullOrder, null, 2)}`,
             );

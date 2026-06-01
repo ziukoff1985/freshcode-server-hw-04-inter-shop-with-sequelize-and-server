@@ -7,7 +7,6 @@ class ItemTypesController {
     async getAllTypes(req, res, next) {
         try {
             const { limit, offset } = req.pagination;
-
             const types = await ItemType.findAll({
                 raw: true,
                 limit,
@@ -50,16 +49,13 @@ class ItemTypesController {
                 order: [['id', 'ASC']],
                 raw: true,
             });
-
             if (allTypes.length === 0) {
                 return next(createError(404, 'Types not found'));
             }
-
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allTypes.length / 2);
             const targetId =
                 halfIndex > 0 ? allTypes[halfIndex - 1].id : allTypes[0].id;
-
             // Select IDs that are greater than the average
             const types = await ItemType.findAll({
                 where: {
@@ -83,11 +79,9 @@ class ItemTypesController {
     async getTypesByTitle(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Type titles are required'));
             }
-
             const types = await ItemType.findAll({
                 where: {
                     title: {
@@ -140,11 +134,9 @@ class ItemTypesController {
     async deleteTypesByTitles(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Type titles are required'));
             }
-
             const deletedRows = await ItemType.destroy({
                 where: {
                     title: {
@@ -152,11 +144,9 @@ class ItemTypesController {
                     },
                 },
             });
-
             if (deletedRows === 0) {
                 return next(createError(404, 'Types not found'));
             }
-
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Types deleted successfully',

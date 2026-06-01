@@ -95,16 +95,13 @@ class ItemsController {
                 attributes: ['id'],
                 order: [['id', 'ASC']],
             });
-
             if (allItems.length === 0) {
                 return next(createError(404, 'Items not found'));
             }
-
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allItems.length / 2);
             const targetId =
                 halfIndex > 0 ? allItems[halfIndex - 1].id : allItems[0].id;
-
             const items = await Item.findAll({
                 attributes: ['id', 'price', 'amount'],
                 where: {
@@ -128,11 +125,9 @@ class ItemsController {
     async getItemsByBrand(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Brand titles are required'));
             }
-
             const brands = await Brand.findAll({
                 attributes: ['id'],
                 where: {
@@ -146,9 +141,7 @@ class ItemsController {
             if (brands.length === 0) {
                 return next(createError(404, 'Brands not found'));
             }
-
             const brandIds = brands.map((brand) => brand.id);
-
             const items = await Item.findAll({
                 attributes: ['id', 'price', 'amount'],
                 include: itemIncludes,
@@ -173,10 +166,8 @@ class ItemsController {
     async createItem(req, res, next) {
         try {
             const { price, amount, ...titles } = req.body;
-
             const ids = await getDependencyIds(titles, next);
             if (!ids) return;
-
             const item = await Item.create({
                 ...ids,
                 price,
@@ -210,11 +201,9 @@ class ItemsController {
     async deleteItemsByBrands(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Brand titles are required'));
             }
-
             const brands = await Brand.findAll({
                 where: {
                     title: {
@@ -226,9 +215,7 @@ class ItemsController {
             if (brands.length === 0) {
                 return next(createError(404, 'Brands not found'));
             }
-
             const brandIds = brands.map((brand) => brand.id);
-
             const deletedRows = await Item.destroy({
                 where: {
                     brandId: {
@@ -236,11 +223,9 @@ class ItemsController {
                     },
                 },
             });
-
             if (deletedRows === 0) {
                 return next(createError(404, 'Items not found'));
             }
-
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Items deleted successfully',
@@ -254,15 +239,12 @@ class ItemsController {
     async updateItem(req, res, next) {
         try {
             const { id, price, amount, ...titles } = req.body;
-
             const ids = await getDependencyIds(titles, next);
             if (!ids) return;
-
             const item = await Item.findOne({ where: { id } });
             if (!item) {
                 return next(createError(404, 'Item not found'));
             }
-
             await item.update({
                 ...ids,
                 price,

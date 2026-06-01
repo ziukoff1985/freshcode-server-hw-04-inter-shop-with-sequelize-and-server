@@ -49,14 +49,12 @@ class CustomersController {
                 order: [['id', 'ASC']],
                 raw: true,
             });
-
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allCustomers.length / 2);
             const targetId =
                 halfIndex > 0
                     ? allCustomers[halfIndex - 1].id
                     : allCustomers[0].id;
-
             // Select IDs that are greater than the average
             const customers = await Customer.findAll({
                 where: {
@@ -67,7 +65,6 @@ class CustomersController {
                 raw: true,
                 order: [['id', 'ASC']],
             });
-
             console.log(
                 `Result from half (id > ${targetId}) is: ${JSON.stringify(customers, null, 2)}`,
             );
@@ -81,11 +78,9 @@ class CustomersController {
     async getCustomersByNames(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Customer names are required'));
             }
-
             const customers = await Customer.findAll({
                 where: {
                     name: {
@@ -138,11 +133,9 @@ class CustomersController {
     async deleteCustomersByNames(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Customer titles are required'));
             }
-
             const deletedRows = await Customer.destroy({
                 where: {
                     name: {
@@ -150,11 +143,9 @@ class CustomersController {
                     },
                 },
             });
-
             if (deletedRows === 0) {
                 return next(createError(404, 'Customers not found'));
             }
-
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Customers deleted successfully',

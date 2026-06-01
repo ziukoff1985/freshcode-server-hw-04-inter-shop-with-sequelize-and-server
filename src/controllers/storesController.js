@@ -49,16 +49,13 @@ class StoresController {
                 order: [['id', 'ASC']],
                 raw: true,
             });
-
             if (allStores.length === 0) {
                 return next(createError(404, 'Stores not found'));
             }
-
             // find the index of the middle element of the array and get the actual ID from there.
             const halfIndex = Math.floor(allStores.length / 2);
             const targetId =
                 halfIndex > 0 ? allStores[halfIndex - 1].id : allStores[0].id;
-
             // Select IDs that are greater than the average
             const stores = await Store.findAll({
                 where: {
@@ -82,11 +79,9 @@ class StoresController {
     async getStoresByTitle(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Store titles are required'));
             }
-
             const stores = await Store.findAll({
                 where: {
                     title: {
@@ -139,11 +134,9 @@ class StoresController {
     async deleteStoresByTitles(req, res, next) {
         try {
             const { values } = req.body;
-
             if (!values || !Array.isArray(values) || values.length === 0) {
                 return next(createError(400, 'Store titles are required'));
             }
-
             const deletedRows = await Store.destroy({
                 where: {
                     title: {
@@ -151,11 +144,9 @@ class StoresController {
                     },
                 },
             });
-
             if (deletedRows === 0) {
                 return next(createError(404, 'Stores not found'));
             }
-
             console.log(`Deleted rows: ${deletedRows}`);
             res.status(200).json({
                 message: 'Stores deleted successfully',
