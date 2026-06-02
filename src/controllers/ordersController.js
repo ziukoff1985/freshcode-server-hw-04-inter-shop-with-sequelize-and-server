@@ -152,39 +152,46 @@ class OrdersController {
     async createOrder(req, res, next) {
         try {
             const { code, paid, customerName, items } = req.body;
+
+            // Find the customer by name
             const customer = await Customer.findOne({
                 where: { name: customerName },
             });
             if (!customer) {
                 return next(createError(404, 'Customer not found'));
             }
+
+            // Check if there are any items
             if (!items || !Array.isArray(items) || items.length === 0) {
                 return next(
                     createError(400, 'Order must contain at least one item'),
                 );
             }
+
+            // Check if all items exist in the database
             const dbItems = await Item.findAll({ where: { id: items } });
             if (dbItems.length !== items.length) {
                 return next(
                     createError(404, 'One or more items not found in database'),
                 );
             }
-            // Рахуємо загальну суму замовлення (amount) автоматично на основі цін товарів в БД!
+            // Calculate the total amount of the order
             const totalAmount = dbItems.reduce(
                 (sum, item) => sum + Number(item.price),
                 0,
             );
-            // 4. Створюємо замовлення
+            // Create the order
             const order = await Order.create({
                 code,
                 amount: totalAmount, // Сума порахована сервером
                 paid,
                 customerId: customer.id,
             });
-            // 5. МАГІЯ SEQUELIZE: додаємо зв'язки в таблицю items_orders
-            // Метод addItems з'являється автоматично, якщо налаштовано Order.belongsToMany(Item)
+
+            // Add relationships to the 'items_orders' table
             await order.addItems(items);
-            // Повертаємо замовлення разом із підтягнутими товарами для красивої відповіді клієнту
+
+            // Return the full order with items to the client
             const fullOrder = await Order.findByPk(order.id, {
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
                 include: [
@@ -265,37 +272,53 @@ class OrdersController {
     async updateOrder(req, res, next) {
         try {
             const { id, customerName, items, ...restUpdateData } = req.body;
+
+            // Find the customer by name
             const customer = await Customer.findOne({
                 where: { name: customerName },
             });
             if (!customer) {
                 return next(createError(404, 'Customer not found'));
             }
+
+            // Check if there are any items
             if (!items || !Array.isArray(items) || items.length === 0) {
                 return next(
                     createError(400, 'Order must contain at least one item'),
                 );
             }
+
+            // Check if all items exist in the database
             const dbItems = await Item.findAll({ where: { id: items } });
             if (dbItems.length !== items.length) {
                 return next(
                     createError(404, 'One or more items not found in database'),
                 );
             }
+
+            // Calculate the total amount of the order
             const totalAmount = dbItems.reduce(
                 (sum, item) => sum + Number(item.price),
                 0,
             );
+
+            // Find the order by id
             const order = await Order.findOne({ where: { id } });
             if (!order) {
                 return next(createError(404, 'Order not found'));
             }
+
+            // Update the order
             await order.update({
                 ...restUpdateData,
                 amount: totalAmount,
                 customerId: customer.id,
             });
+
+            // Add relationships to the 'items_orders' table
             await order.setItems(items);
+
+            // Return the full order with items to the client
             const fullOrder = await Order.findByPk(order.id, {
                 include: [
                     { model: Customer, attributes: ['name'] },
