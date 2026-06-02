@@ -1,0 +1,1026 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict Fk40pITkzx9br1lEJXQybghE2GCNl7MjQIQY4PknvpMp6zLk3xVADD9NPVyNtYm
+
+-- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
+-- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: brands; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.brands (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.brands OWNER TO postgres;
+
+--
+-- Name: brands_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.brands_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.brands_id_seq OWNER TO postgres;
+
+--
+-- Name: brands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.brands_id_seq OWNED BY public.brands.id;
+
+
+--
+-- Name: customers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.customers (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.customers OWNER TO postgres;
+
+--
+-- Name: customers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.customers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.customers_id_seq OWNER TO postgres;
+
+--
+-- Name: customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.customers_id_seq OWNED BY public.customers.id;
+
+
+--
+-- Name: item_categories; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.item_categories (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.item_categories OWNER TO postgres;
+
+--
+-- Name: item_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.item_categories_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.item_categories_id_seq OWNER TO postgres;
+
+--
+-- Name: item_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.item_categories_id_seq OWNED BY public.item_categories.id;
+
+
+--
+-- Name: item_types; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.item_types (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.item_types OWNER TO postgres;
+
+--
+-- Name: item_types_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.item_types_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.item_types_id_seq OWNER TO postgres;
+
+--
+-- Name: item_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.item_types_id_seq OWNED BY public.item_types.id;
+
+
+--
+-- Name: items; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.items (
+    id integer NOT NULL,
+    category_id integer NOT NULL,
+    type_id integer NOT NULL,
+    brand_id integer NOT NULL,
+    model_id integer NOT NULL,
+    price numeric(10,2) DEFAULT 0 NOT NULL,
+    store_id integer NOT NULL,
+    amount integer DEFAULT 1 NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.items OWNER TO postgres;
+
+--
+-- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.items_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.items_id_seq OWNER TO postgres;
+
+--
+-- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.items_id_seq OWNED BY public.items.id;
+
+
+--
+-- Name: items_orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.items_orders (
+    item_id integer NOT NULL,
+    order_id integer NOT NULL
+);
+
+
+ALTER TABLE public.items_orders OWNER TO postgres;
+
+--
+-- Name: models; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.models (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    brand_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.models OWNER TO postgres;
+
+--
+-- Name: models_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.models_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.models_id_seq OWNER TO postgres;
+
+--
+-- Name: models_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.models_id_seq OWNED BY public.models.id;
+
+
+--
+-- Name: order_code_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.order_code_seq
+    START WITH 10051
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.order_code_seq OWNER TO postgres;
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.orders (
+    id integer NOT NULL,
+    code integer DEFAULT nextval('public.order_code_seq'::regclass) NOT NULL,
+    date timestamp with time zone NOT NULL,
+    amount numeric(10,2) NOT NULL,
+    paid boolean DEFAULT false,
+    customer_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.orders OWNER TO postgres;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.orders_id_seq OWNER TO postgres;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- Name: stores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.stores (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.stores OWNER TO postgres;
+
+--
+-- Name: stores_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.stores_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.stores_id_seq OWNER TO postgres;
+
+--
+-- Name: stores_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.stores_id_seq OWNED BY public.stores.id;
+
+
+--
+-- Name: brands id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.brands ALTER COLUMN id SET DEFAULT nextval('public.brands_id_seq'::regclass);
+
+
+--
+-- Name: customers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers ALTER COLUMN id SET DEFAULT nextval('public.customers_id_seq'::regclass);
+
+
+--
+-- Name: item_categories id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.item_categories ALTER COLUMN id SET DEFAULT nextval('public.item_categories_id_seq'::regclass);
+
+
+--
+-- Name: item_types id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.item_types ALTER COLUMN id SET DEFAULT nextval('public.item_types_id_seq'::regclass);
+
+
+--
+-- Name: items id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items ALTER COLUMN id SET DEFAULT nextval('public.items_id_seq'::regclass);
+
+
+--
+-- Name: models id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.models ALTER COLUMN id SET DEFAULT nextval('public.models_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- Name: stores id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stores ALTER COLUMN id SET DEFAULT nextval('public.stores_id_seq'::regclass);
+
+
+--
+-- Data for Name: brands; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.brands (id, title, description, created_at, updated_at) FROM stdin;
+1	Samsung	Global electronics leader	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+2	Apple	Premium tech and software	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+3	Sony	Audio, video and gaming specialist	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+4	LG	Home appliances and display innovator	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+5	Dell	Computer and enterprise solutions	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+6	Bosch	German precision tools and appliances	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+7	Nike	Performance sports apparel	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+8	Logitech	Computer peripherals and accessories	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+9	Xiaomi	Affordable smart technology	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+10	Asus	Gaming and high-performance hardware	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+11	HP	Printers and business laptops	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+12	Bose	High-end audio solutions	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+13	Nikon	Professional imaging equipment	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+14	Dyson	Innovative home cleaning technology	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+15	Philips	Lighting and personal healthcare	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
+20	ENEXT	Some description about CNC	2026-06-02 13:30:15.671+03	2026-06-02 13:30:15.671+03
+21	CNC	Some description about CNC	2026-06-02 13:30:23.193+03	2026-06-02 13:30:23.193+03
+\.
+
+
+--
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.customers (id, name, email, password, created_at, updated_at) FROM stdin;
+1	Alice Johnson	alice@test.com	$2b$10$LcUYTSKzkNX4R2R/2Yit8uJdwoqrV/CLNu2qhFwUi479KCKNMsClm	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+2	Bob Smith	bob@test.com	$2b$10$5Q9sgM14ZcZQsJS1tN2irelxA6fNw5Uqe0ZxSVeL5ZuT2eBrzfH.G	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+3	Charlie Davis	charlie@test.com	$2b$10$eTRHalatK/SSMYX/ChH6tOUZlxu1rrQyZdlf./TUoAZ8s7WeTup8a	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+4	Michael Brown	michael@test.com	$2b$10$RreCELtWCU924/sUGxeBXOrqHSC89Wg5cYwG5B43xZcahyDx97XJ2	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+5	Emily Wilson	emily@test.com	$2b$10$cf33ODOMUsVh5QVmUW4G9ubQsSlxBtcM6xQ62kxq3a3I.OJAUeIIm	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+6	David Miller	david@test.com	$2b$10$ObqdiWfcWwHjViZABrYdC..UajcPE6dohqR2kwNyHZn6uswAcgL9a	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+7	Sarah Taylor	sarah@test.com	$2b$10$uDb7Gwhx3O8chr69WfAW9.xEF7iYGr.ajZNc/wxUsVrGL4jbu9hHG	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+8	James Anderson	james@test.com	$2b$10$yoeFpZ/B5BKIO.xnyS925eUUeGUYLYZj32reaDjI5KXsQj5Ov3Bce	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+9	Linda Thomas	linda@test.com	$2b$10$R9mwHtQJU.tb/mAPfnstruxBCcwgsKInNn1TaXuu1OZrCCBD.anTi	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+10	Robert Moore	robert@test.com	$2b$10$fEmVjdjksXHm2q5dfKuR6.yzjishGKL1VYozYa8pCTf5OcEpCiiHm	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+11	Jessica Lee	jessica@test.com	$2b$10$f6Uy8F7VZfKAub8iuk2JJ.GjOwLQwAvHDOqK38LaXc.nMpsrDPTIO	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+12	William Garcia	will@test.com	$2b$10$ggcM4cKPf7I1vL4MP84DGOzi5gQmQh2yK8CyPHQSL92AG4AMlVzy2	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+13	Karen White	karen@test.com	$2b$10$G4W87SCg0YLUFXqbp0TQ5eTb/noO/9DrT9tCXHy59PRL0W4HKG7Ny	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+14	Joseph Harris	joseph@test.com	$2b$10$RoiHmdkZoBDwLTyqs4vRruKtw1QaJOIt3ja4dIuTqtsumeZ/rxixS	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+15	Nancy Martin	nancy@test.com	$2b$10$R9HVt.hQ6u09eJxE6L9E.u6bSyZU1HBz0eF.E5yHqivrdzlgJpBCy	2026-06-02 12:32:03.428413+03	2026-06-02 12:32:03.428413+03
+18	Ziukov Boris	ziukov@test.com	$2b$10$zpNCC7ANIDhlsYv1n76DVOrgnKfGUDoa2XldPuOny0R7W2KFnEvgm	2026-06-02 12:45:48.337+03	2026-06-02 12:45:48.337+03
+21	Kate Windy	kate@test.com	$2b$10$rD0tm4nrpPcyiLJoi4yuL.0mbLvEUjGqQSpxyrCJcDgcgKBbHf2lG	2026-06-02 12:47:36.449+03	2026-06-02 12:47:36.449+03
+\.
+
+
+--
+-- Data for Name: item_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.item_categories (id, title, description, created_at, updated_at) FROM stdin;
+1	Smartphones	Mobile phones and handheld devices	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+2	Laptops	Portable personal computers	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+3	Home Appliances	Kitchen and laundry equipment	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+4	Audio	Headphones, speakers and hi-fi systems	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+5	TV & Video	Televisions and projectors	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+6	Wearables	Smartwatches and fitness trackers	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+7	Cameras	Photo and video equipment	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+8	Gaming	Consoles, controllers and PC gaming	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+9	Furniture	Home and office furniture	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+10	Sports	Gym equipment and outdoor gear	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+11	Kitchenware	Cooking tools and dining sets	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+12	Beauty	Personal care and grooming devices	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+13	Networking	Routers, switches and modems	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+14	Tools	Hand and power tools	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+15	Lighting	Smart bulbs and home lighting	2026-06-02 12:32:03.438265+03	2026-06-02 12:32:03.438265+03
+\.
+
+
+--
+-- Data for Name: item_types; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.item_types (id, title, description, created_at, updated_at) FROM stdin;
+1	Mobile Phone	Cellular communication devices	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+2	Notebook	Portable workstation	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+3	Fridge	Food cooling and freezing	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+4	Wireless Earbuds	Bluetooth audio devices	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+5	OLED TV	High-end television displays	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+6	Smartwatch	Wrist-worn smart devices	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+7	DSLR Camera	Professional digital cameras	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+8	Game Console	Gaming hardware systems	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+9	Office Chair	Ergonomic seating	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+10	Treadmill	Indoor running equipment	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+11	Air Fryer	Healthy cooking appliances	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+12	Electric Shaver	Men grooming tools	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+13	Wi-Fi Router	Internet connectivity devices	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+14	Drill	Power tools for construction	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+15	Smart Bulb	IoT enabled lighting	2026-06-02 12:32:03.435726+03	2026-06-02 12:32:03.435726+03
+\.
+
+
+--
+-- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.items (id, category_id, type_id, brand_id, model_id, price, store_id, amount, created_at, updated_at) FROM stdin;
+1	1	1	1	1	1200.00	1	10	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+2	1	1	1	2	450.00	2	25	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+3	1	6	1	3	300.00	1	15	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+4	5	5	1	4	900.00	1	5	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+5	1	2	1	5	800.00	2	8	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+6	1	1	2	6	1100.00	1	12	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+7	2	2	2	7	2500.00	1	7	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+8	6	6	2	8	400.00	3	20	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+9	4	4	2	9	550.00	5	30	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+10	1	1	2	10	1300.00	1	10	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+11	8	8	3	11	500.00	1	50	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+12	4	4	3	12	350.00	5	40	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+13	7	7	3	13	2200.00	1	5	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+14	5	5	3	14	1800.00	3	3	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+15	8	8	3	15	70.00	2	100	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+16	5	5	4	16	1300.00	3	6	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+17	3	3	4	17	2200.00	1	4	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+18	2	2	4	18	1400.00	2	9	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+19	3	11	4	19	350.00	5	15	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+20	2	2	5	20	1500.00	2	11	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+21	2	2	5	21	1100.00	2	14	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+22	5	3	5	22	450.00	1	20	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+23	8	8	5	23	900.00	4	6	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+24	3	3	6	24	700.00	1	10	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+25	3	3	6	25	400.00	3	12	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+26	14	14	6	26	150.00	2	35	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+27	10	10	7	27	120.00	4	60	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+28	10	10	7	28	110.00	4	55	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+29	10	10	7	29	130.00	4	40	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+30	8	8	8	30	100.00	5	80	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+31	8	8	8	31	150.00	2	25	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+32	8	13	8	32	80.00	1	40	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+33	1	1	9	33	300.00	5	70	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+34	6	6	9	34	50.00	5	150	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+35	3	3	9	35	400.00	3	10	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+36	2	2	10	36	1800.00	2	5	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+37	2	2	10	37	1200.00	4	8	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+38	13	13	10	38	200.00	1	15	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+39	11	11	11	39	250.00	1	20	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+40	2	2	11	40	1600.00	2	4	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+41	2	2	11	41	800.00	4	12	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+42	4	4	12	42	350.00	4	45	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+43	4	4	12	43	200.00	5	30	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+44	7	7	13	44	4500.00	1	2	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+45	7	7	13	45	2800.00	3	3	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+46	3	3	14	46	800.00	2	10	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+47	12	12	14	47	500.00	5	15	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+48	5	5	14	48	400.00	1	7	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+49	15	15	15	49	100.00	5	200	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+50	12	12	15	50	150.00	1	40	2026-06-02 12:32:03.44917+03	2026-06-02 12:32:03.44917+03
+\.
+
+
+--
+-- Data for Name: items_orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.items_orders (item_id, order_id) FROM stdin;
+1	1
+2	2
+3	3
+4	4
+5	5
+6	6
+7	7
+44	8
+45	8
+7	8
+8	9
+9	10
+11	11
+12	12
+13	13
+14	14
+15	15
+16	16
+17	17
+18	18
+19	19
+20	20
+21	21
+22	22
+23	23
+24	24
+25	25
+26	26
+27	27
+28	28
+29	29
+30	30
+31	31
+32	32
+33	33
+34	34
+35	35
+36	36
+37	37
+38	38
+39	39
+40	40
+41	41
+42	42
+43	43
+44	44
+45	45
+46	46
+47	47
+48	48
+49	49
+50	50
+\.
+
+
+--
+-- Data for Name: models; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.models (id, title, description, brand_id, created_at, updated_at) FROM stdin;
+1	Galaxy S24	Flagship	1	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+2	Galaxy A54	Mid-range	1	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+3	Galaxy Watch 6	Wearable	1	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+4	QLED 4K TV	Display	1	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+5	Galaxy Tab S9	Tablet	1	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+6	iPhone 15	Flagship	2	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+7	MacBook Pro M3	Laptop	2	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+8	iPad Air	Tablet	2	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+9	AirPods Max	Audio	2	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+10	iPhone 15 Pro	Flagship	2	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+11	PlayStation 5	Gaming	3	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+12	WH-1000XM5	Headphones	3	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+13	Alpha 7 IV	Camera	3	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+14	Bravia XR	TV	3	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+15	PS5 Controller	Accessory	3	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+16	OLED C3	TV	4	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+17	InstaView	Fridge	4	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+18	Gram 17	Laptop	4	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+19	Air Fryer XXL	Kitchen	4	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+20	XPS 13	Laptop	5	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+21	Latitude 5000	Business PC	5	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+22	UltraSharp 27	Monitor	5	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+23	Dell G15	Gaming	5	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+24	Series 6	Washing Machine	6	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+25	Unlimited 7	Vacuum	6	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+26	EasyDrill 1200	Power tool	6	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+27	Air Max	Running	7	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+28	Pegasus 40	Training	7	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+29	Metcon 9	Gym	7	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+30	MX Master 3S	Mouse	8	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+31	G Pro X	Keyboard	8	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+32	C920	Webcam	8	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+33	Redmi Note 13	Phone	9	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+34	Mi Band 8	Tracker	9	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+35	Robot Vacuum S10	Cleaning	9	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+36	ROG Strix	Gaming Laptop	10	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+37	Zenbook S13	Ultrabook	10	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+38	RT-AX88U	Router	10	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+39	LaserJet Pro	Printer	11	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+40	Spectre x360	Laptop	11	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+41	Pavilion	Desktop	11	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+42	QuietComfort	Headphones	12	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+43	SoundLink	Speaker	12	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+44	Z9	Mirrorless Camera	13	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+45	D850	DSLR	13	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+46	V15 Detect	Vacuum	14	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+47	Airwrap	Beauty	14	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+48	Purifier Cool	Fan	14	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+49	Hue Starter Kit	Lighting	15	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+50	Sonicare	Health	15	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+51	OneBlade	Shaver	15	2026-06-02 12:32:03.440723+03	2026-06-02 12:32:03.440723+03
+\.
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.orders (id, code, date, amount, paid, customer_id, created_at, updated_at) FROM stdin;
+1	10001	2026-03-10 15:12:58.402+02	1200.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+2	10002	2026-03-10 15:12:58.402+02	450.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+3	10003	2026-03-10 15:12:58.402+02	300.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+4	10004	2026-03-10 15:12:58.402+02	150.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+5	10005	2026-03-10 15:12:58.402+02	800.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+6	10006	2026-03-10 15:12:58.402+02	100.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+7	10007	2026-03-10 15:12:58.402+02	200.00	f	1	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+8	10008	2026-03-10 15:12:58.402+02	9500.00	f	4	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+9	10009	2026-03-10 15:12:58.402+02	1500.00	f	2	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+10	10010	2026-03-10 15:12:58.402+02	600.00	f	2	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+11	10011	2026-03-10 15:12:58.402+02	2200.00	f	3	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+12	10012	2026-03-10 15:12:58.402+02	500.00	f	5	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+13	10013	2026-03-10 15:12:58.402+02	150.00	f	6	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+14	10014	2026-03-10 15:12:58.402+02	80.00	f	7	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+15	10015	2026-03-10 15:12:58.402+02	120.00	f	8	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+16	10016	2026-03-10 15:12:58.402+02	250.00	f	9	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+17	10017	2026-03-10 15:12:58.402+02	400.00	f	10	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+19	10019	2026-03-10 15:12:58.402+02	110.00	f	12	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+21	10021	2026-03-10 15:12:58.402+02	450.00	f	14	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+22	10022	2026-03-10 15:12:58.402+02	600.00	f	15	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+23	10023	2026-03-10 15:12:58.402+02	700.00	f	2	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+24	10024	2026-03-10 15:12:58.402+02	100.00	f	3	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+25	10025	2026-03-10 15:12:58.402+02	200.00	f	5	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+26	10026	2026-03-10 15:12:58.402+02	300.00	f	6	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+27	10027	2026-03-10 15:12:58.402+02	400.00	f	7	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+28	10028	2026-03-10 15:12:58.402+02	500.00	f	8	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+29	10029	2026-03-10 15:12:58.402+02	600.00	f	9	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+30	10030	2026-03-10 15:12:58.402+02	700.00	f	10	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+32	10032	2026-03-10 15:12:58.402+02	900.00	f	12	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+34	10034	2026-03-10 15:12:58.402+02	110.00	f	14	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+35	10035	2026-03-10 15:12:58.402+02	220.00	f	15	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+36	10036	2026-03-10 15:12:58.402+02	330.00	f	2	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+37	10037	2026-03-10 15:12:58.402+02	440.00	f	3	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+38	10038	2026-03-10 15:12:58.402+02	550.00	f	5	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+39	10039	2026-03-10 15:12:58.402+02	660.00	f	6	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+40	10040	2026-03-10 15:12:58.402+02	770.00	f	7	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+41	10041	2026-03-10 15:12:58.402+02	880.00	f	8	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+42	10042	2026-03-10 15:12:58.402+02	990.00	f	9	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+43	10043	2026-03-10 15:12:58.402+02	150.00	f	10	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+45	10045	2026-03-10 15:12:58.402+02	350.00	f	12	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+47	10047	2026-03-10 15:12:58.402+02	550.00	f	14	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+48	10048	2026-03-10 15:12:58.402+02	650.00	f	15	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+49	10049	2026-03-10 15:12:58.402+02	750.00	f	2	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+50	10050	2026-03-10 15:12:58.402+02	850.00	f	3	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+18	10018	2026-03-10 15:12:58.402+02	1400.00	f	11	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+20	10020	2026-03-10 15:12:58.402+02	1500.00	f	13	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+31	10031	2026-03-10 15:12:58.402+02	150.00	f	11	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+33	10033	2026-03-10 15:12:58.402+02	300.00	f	13	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+44	10044	2026-03-10 15:12:58.402+02	4500.00	f	11	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+46	10046	2026-03-10 15:12:58.402+02	800.00	f	13	2026-06-02 12:32:03.444105+03	2026-06-02 12:32:03.444105+03
+\.
+
+
+--
+-- Data for Name: stores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.stores (id, title, description, created_at, updated_at) FROM stdin;
+1	Main Warehouse	Central distribution hub in Kyiv	2026-06-02 12:32:03.433336+03	2026-06-02 12:32:03.433336+03
+2	Western Hub	Regional warehouse in Lviv	2026-06-02 12:32:03.433336+03	2026-06-02 12:32:03.433336+03
+3	Southern Port	Import terminal in Odesa	2026-06-02 12:32:03.433336+03	2026-06-02 12:32:03.433336+03
+4	Eastern Branch	Warehouse facility in Kharkiv	2026-06-02 12:32:03.433336+03	2026-06-02 12:32:03.433336+03
+5	Retail Outlet	Direct store warehouse in Dnipro	2026-06-02 12:32:03.433336+03	2026-06-02 12:32:03.433336+03
+\.
+
+
+--
+-- Name: brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.brands_id_seq', 21, true);
+
+
+--
+-- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.customers_id_seq', 22, true);
+
+
+--
+-- Name: item_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.item_categories_id_seq', 19, true);
+
+
+--
+-- Name: item_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.item_types_id_seq', 19, true);
+
+
+--
+-- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.items_id_seq', 55, true);
+
+
+--
+-- Name: models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.models_id_seq', 55, true);
+
+
+--
+-- Name: order_code_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.order_code_seq', 10054, true);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 56, true);
+
+
+--
+-- Name: stores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.stores_id_seq', 9, true);
+
+
+--
+-- Name: brands brands_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.brands
+    ADD CONSTRAINT brands_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: brands brands_title_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.brands
+    ADD CONSTRAINT brands_title_unique UNIQUE (title);
+
+
+--
+-- Name: customers customers_email_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_email_unique UNIQUE (email);
+
+
+--
+-- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.customers
+    ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: item_categories item_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.item_categories
+    ADD CONSTRAINT item_categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: item_categories item_categories_title_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.item_categories
+    ADD CONSTRAINT item_categories_title_unique UNIQUE (title);
+
+
+--
+-- Name: item_types item_types_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.item_types
+    ADD CONSTRAINT item_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: item_types item_types_title_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.item_types
+    ADD CONSTRAINT item_types_title_unique UNIQUE (title);
+
+
+--
+-- Name: items_orders items_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items_orders
+    ADD CONSTRAINT items_orders_pkey PRIMARY KEY (item_id, order_id);
+
+
+--
+-- Name: items items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items
+    ADD CONSTRAINT items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: models models_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.models
+    ADD CONSTRAINT models_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: models models_title_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.models
+    ADD CONSTRAINT models_title_unique UNIQUE (title);
+
+
+--
+-- Name: orders orders_code_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_code_unique UNIQUE (code);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stores stores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stores
+    ADD CONSTRAINT stores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stores stores_title_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.stores
+    ADD CONSTRAINT stores_title_unique UNIQUE (title);
+
+
+--
+-- Name: items items_brand_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items
+    ADD CONSTRAINT items_brand_id_fkey FOREIGN KEY (brand_id) REFERENCES public.brands(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: items items_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items
+    ADD CONSTRAINT items_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.item_categories(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: items items_model_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items
+    ADD CONSTRAINT items_model_id_fkey FOREIGN KEY (model_id) REFERENCES public.models(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: items_orders items_orders_item_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items_orders
+    ADD CONSTRAINT items_orders_item_id_fkey FOREIGN KEY (item_id) REFERENCES public.items(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: items_orders items_orders_order_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items_orders
+    ADD CONSTRAINT items_orders_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.orders(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: items items_store_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items
+    ADD CONSTRAINT items_store_id_fkey FOREIGN KEY (store_id) REFERENCES public.stores(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: items items_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.items
+    ADD CONSTRAINT items_type_id_fkey FOREIGN KEY (type_id) REFERENCES public.item_types(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: models models_brand_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.models
+    ADD CONSTRAINT models_brand_id_fkey FOREIGN KEY (brand_id) REFERENCES public.brands(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: orders orders_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customers(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict Fk40pITkzx9br1lEJXQybghE2GCNl7MjQIQY4PknvpMp6zLk3xVADD9NPVyNtYm
+
