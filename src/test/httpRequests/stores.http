@@ -28,7 +28,7 @@ POST http://localhost:5000/api/stores HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Sweet Factory",
+    "title": "Shang Hai Factory",
     "description": "Some description about Shang Hai Factory"
 }
 
@@ -39,7 +39,7 @@ PUT http://localhost:5000/api/stores HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 8,
+    "id": 13,
     "title": "Odessa Factory",
     "description": "Some description about Odessa Factory"
 }
@@ -47,7 +47,7 @@ Content-Type: application/json
 ###
 
 # Delete store by id
-DELETE http://localhost:5000/api/stores/9
+DELETE http://localhost:5000/api/stores/12
 
 ###
 

@@ -30,7 +30,7 @@ Content-Type: application/json
 {
     "categoryTitle": "Cameras",
     "typeTitle": "DSLR Camera",
-    "brandTitle": "ENEXT",
+    "brandTitle": "CNC",
     "modelTitle": "C920",
     "price": 100000.05,
     "storeTitle": "Retail Outlet",
@@ -44,20 +44,19 @@ PUT http://localhost:5000/api/items HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 51,
+    "id": 58,
     "categoryTitle": "Gaming",
     "typeTitle": "Game Console",
-    "brandTitle": "Xiaomi",
+    "brandTitle": "ENEXT",
     "modelTitle": "PlayStation 5",
     "price": 10000.05,
-    "storeTitle": "Western Hub",
-    "amount": 2
+    "storeTitle": "Western Hub"
 }
 
 ###
 
 # Delete item by id
-DELETE http://localhost:5000/api/items/51
+DELETE http://localhost:5000/api/items/58
 
 ###
 

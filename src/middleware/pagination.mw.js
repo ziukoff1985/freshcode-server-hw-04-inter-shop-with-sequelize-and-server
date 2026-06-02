@@ -8,11 +8,16 @@ module.exports.paginateElements = async (req, res, next) => {
         offset: 0,
     };
 
+    const parsedResults = Number(results);
+    const parsedPage = Number(page);
+
     const validLimit =
-        parseInt(results, 10) > 0
-            ? parseInt(results, 10)
+        Number.isInteger(parsedResults) && parsedResults > 0
+            ? parsedResults
             : defaultPagination.limit;
-    const validPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
+
+    const validPage =
+        Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
 
     const pagination = {
         limit: validLimit,
