@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             code: {
                 type: DataTypes.INTEGER,
-                // allowNull: false,
+                allowNull: false,
                 unique: {
                     name: 'orders_code_unique',
                     msg: 'Order code already exists',
