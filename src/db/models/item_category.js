@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
             title: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: {
+                    name: 'item_categories_title_unique',
+                    msg: 'Item category title already exists',
+                },
             },
             description: DataTypes.TEXT,
         },

@@ -39,13 +39,12 @@ const ITEM_VALIDATION_SCHEMA = yup.object().shape({
     typeTitle: REQUIRED_STRING_SCHEMA,
     brandTitle: REQUIRED_STRING_SCHEMA,
     modelTitle: REQUIRED_STRING_SCHEMA,
-    price: yup.number().positive('Price must be a positive number').required(),
+    price: yup.number().positive('Price must be a positive number'),
     storeTitle: REQUIRED_STRING_SCHEMA,
     amount: yup
         .number()
         .integer('Amount must be an integer')
-        .positive('Amount must be a positive number')
-        .nullable(),
+        .positive('Amount must be a positive number'),
 });
 
 const MODEL_VALIDATION_SCHEMA = yup.object().shape({
@@ -55,7 +54,7 @@ const MODEL_VALIDATION_SCHEMA = yup.object().shape({
 });
 
 const ORDER_VALIDATION_SCHEMA = yup.object().shape({
-    code: TITLE_NAME_CODE_SCHEMA,
+    code: yup.number().integer().positive('Code must be a positive number'),
     paid: yup.boolean(),
     customerName: REQUIRED_STRING_SCHEMA,
     items: yup

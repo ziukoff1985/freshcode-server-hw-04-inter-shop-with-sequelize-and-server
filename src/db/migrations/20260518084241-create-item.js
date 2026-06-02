@@ -50,8 +50,9 @@ module.exports = {
                 onUpdate: 'CASCADE',
             },
             price: {
-                type: Sequelize.DECIMAL,
+                type: Sequelize.DECIMAL(10, 2),
                 allowNull: false,
+                defaultValue: 0.0,
             },
             store_id: {
                 type: Sequelize.INTEGER,
@@ -65,6 +66,8 @@ module.exports = {
             },
             amount: {
                 type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 1,
             },
             created_at: {
                 type: Sequelize.DATE,

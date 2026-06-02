@@ -18,8 +18,13 @@ module.exports = (sequelize, DataTypes) => {
     Order.init(
         {
             code: {
-                type: DataTypes.STRING,
-                allowNull: false,
+                type: DataTypes.INTEGER,
+                // allowNull: false,
+                unique: {
+                    name: 'orders_code_unique',
+                    msg: 'Order code already exists',
+                },
+                defaultValue: Sequelize.literal("nextval('order_code_seq')"),
             },
             date: {
                 type: DataTypes.DATE,
@@ -27,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: Sequelize.NOW,
             },
             amount: {
-                type: DataTypes.DECIMAL,
+                type: DataTypes.DECIMAL(10, 2),
                 allowNull: false,
                 get() {
                     const value = this.getDataValue('amount');

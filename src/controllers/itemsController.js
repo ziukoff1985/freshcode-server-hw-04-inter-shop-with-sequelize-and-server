@@ -37,7 +37,6 @@ async function getDependencyIds(titles, next) {
     if (!model) return next(createError(404, 'Model not found'));
     if (!store) return next(createError(404, 'Store not found'));
 
-    // Return clear foreign keys
     return {
         categoryId: category.id,
         typeId: type.id,

@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
             title: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: {
+                    name: 'models_title_unique',
+                    msg: 'Model title already exists',
+                },
             },
             description: DataTypes.TEXT,
             brandId: {

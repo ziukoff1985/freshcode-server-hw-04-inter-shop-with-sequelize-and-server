@@ -25,6 +25,11 @@ module.exports = {
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             },
         });
+        await queryInterface.addConstraint('item_types', {
+            fields: ['title'],
+            type: 'unique',
+            name: 'item_types_title_unique',
+        });
     },
     async down(queryInterface, Sequelize) {
         await queryInterface.dropTable('item_types');
