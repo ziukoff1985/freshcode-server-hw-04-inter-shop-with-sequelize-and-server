@@ -81,9 +81,7 @@ class ItemCategoriesController {
     async getCategoriesByTitle(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Category titles are required'));
-            }
+
             const categories = await ItemCategory.findAll({
                 where: {
                     title: {
@@ -136,9 +134,7 @@ class ItemCategoriesController {
     async deleteCategoriesByTitles(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Category titles are required'));
-            }
+
             const deletedRows = await ItemCategory.destroy({
                 where: {
                     title: {

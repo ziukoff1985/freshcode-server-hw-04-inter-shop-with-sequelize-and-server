@@ -83,9 +83,7 @@ class ModelsController {
     async getModelsByTitle(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Brand titles are required'));
-            }
+
             const models = await Model.findAll({
                 attributes: ['id', 'title', 'description'],
                 include: [{ model: Brand, attributes: ['title'] }],
@@ -147,9 +145,7 @@ class ModelsController {
     async deleteModelsByTitles(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Model titles are required'));
-            }
+
             const deletedRows = await Model.destroy({
                 where: {
                     title: {

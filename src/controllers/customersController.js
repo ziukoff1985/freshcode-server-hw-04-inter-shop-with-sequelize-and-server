@@ -78,9 +78,7 @@ class CustomersController {
     async getCustomersByNames(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Customer names are required'));
-            }
+
             const customers = await Customer.findAll({
                 where: {
                     name: {
@@ -133,9 +131,7 @@ class CustomersController {
     async deleteCustomersByNames(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Customer titles are required'));
-            }
+
             const deletedRows = await Customer.destroy({
                 where: {
                     name: {

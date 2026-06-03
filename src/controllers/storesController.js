@@ -79,9 +79,7 @@ class StoresController {
     async getStoresByTitle(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Store titles are required'));
-            }
+
             const stores = await Store.findAll({
                 where: {
                     title: {
@@ -134,9 +132,7 @@ class StoresController {
     async deleteStoresByTitles(req, res, next) {
         try {
             const { values } = req.body;
-            if (!values || !Array.isArray(values) || values.length === 0) {
-                return next(createError(400, 'Store titles are required'));
-            }
+
             const deletedRows = await Store.destroy({
                 where: {
                     title: {
