@@ -28,8 +28,7 @@ class ModelsController {
     async getModelById(req, res, next) {
         try {
             const { id } = req.params;
-            const model = await Model.findOne({
-                where: { id },
+            const model = await Model.findByPk(id, {
                 attributes: ['id', 'title', 'description'],
                 include: [{ model: Brand, attributes: ['title'] }],
             });
@@ -173,7 +172,7 @@ class ModelsController {
             if (!brand) {
                 return next(createError(404, 'Brand not found'));
             }
-            const model = await Model.findOne({ where: { id } });
+            const model = await Model.findByPk(id);
             if (!model) {
                 return next(createError(404, 'Model not found'));
             }

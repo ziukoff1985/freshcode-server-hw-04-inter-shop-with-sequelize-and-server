@@ -40,7 +40,7 @@ PUT http://localhost:5000/api/orders HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 60,
+    "id": 61,
     "paid": false,
     "customerName": "Kate Windy",
     "items": [1, 2, 3, 4, 5]
@@ -48,7 +48,7 @@ Content-Type: application/json
 ###
 
 # Delete order by id
-DELETE http://localhost:5000/api/orders/60
+DELETE http://localhost:5000/api/orders/61
 
 ###
 

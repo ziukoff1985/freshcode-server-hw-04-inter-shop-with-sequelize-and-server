@@ -71,8 +71,7 @@ class ItemsController {
     async getItemById(req, res, next) {
         try {
             const { id } = req.params;
-            const item = await Item.findOne({
-                where: { id },
+            const item = await Item.findByPk(id, {
                 attributes: ['id', 'price', 'amount'],
                 include: itemIncludes,
             });
@@ -236,7 +235,7 @@ class ItemsController {
             const { id, price, amount, ...titles } = req.body;
             const ids = await getDependencyIds(titles, next);
             if (!ids) return;
-            const item = await Item.findOne({ where: { id } });
+            const item = await Item.findByPk(id);
             if (!item) {
                 return next(createError(404, 'Item not found'));
             }

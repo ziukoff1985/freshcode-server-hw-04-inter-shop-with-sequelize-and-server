@@ -35,8 +35,7 @@ class OrdersController {
     async getOrderById(req, res, next) {
         try {
             const { id } = req.params;
-            const order = await Order.findOne({
-                where: { id },
+            const order = await Order.findByPk(id, {
                 attributes: ['id', 'code', 'paid', 'date', 'amount'],
                 include: [
                     { model: Customer, attributes: ['name'] },
@@ -299,7 +298,7 @@ class OrdersController {
             );
 
             // Find the order by id
-            const order = await Order.findOne({ where: { id } });
+            const order = await Order.findByPk(id);
             if (!order) {
                 return next(createError(404, 'Order not found'));
             }
