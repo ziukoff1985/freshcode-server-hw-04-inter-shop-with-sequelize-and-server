@@ -189,7 +189,7 @@ class BrandsController {
         try {
             const { brandId } = req.params;
 
-            // Перевіряємо, чи був завантажений файл
+            // 1. Validation: Check if a file was uploaded by multer
             if (!req.file) {
                 await t.rollback();
                 console.log('No file uploaded or file type is not supported');
@@ -203,12 +203,14 @@ class BrandsController {
 
             const { filename } = req.file;
 
+            // 2. Database Check: Find the target brand and get its current logo path
             const currentBrand = await Brand.findByPk(brandId, {
                 transaction: t,
                 raw: true,
                 attributes: ['logo'],
             });
 
+            // 3. Error Handling: If brand doesn't exist, roll back DB and delete the uploaded file
             if (!currentBrand) {
                 console.log('Brand not found');
                 await t.rollback();
@@ -227,6 +229,7 @@ class BrandsController {
 
             const oldLogoFilename = currentBrand.logo;
 
+            // 4. Execution: Update the brand's logo in the database
             const [, [updatedBrand]] = await Brand.update(
                 { logo: filename },
                 {
@@ -239,8 +242,11 @@ class BrandsController {
             );
 
             console.log(`Result is: ${JSON.stringify(updatedBrand, null, 2)}`);
+
+            // 5. Commit: Successfully save changes to the database
             await t.commit();
 
+            // 6. Cleanup: Delete the old logo file from disk if it existed
             if (oldLogoFilename) {
                 const filePath = path.resolve(
                     staticPath,
@@ -257,6 +263,8 @@ class BrandsController {
         } catch (error) {
             console.log(error.message);
             await t.rollback();
+
+            // 7. Global Catch Cleanup: Delete the newly uploaded file if a DB or server error occurs
             if (req.file) {
                 const filePath = path.resolve(
                     staticPath,
