@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
             description: DataTypes.TEXT,
+            logo: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
         },
         {
             sequelize,
