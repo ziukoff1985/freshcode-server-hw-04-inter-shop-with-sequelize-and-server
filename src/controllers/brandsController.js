@@ -180,6 +180,94 @@ class BrandsController {
             next(error);
         }
     }
+
+    async changeLogo(req, res, next) {
+        const t = await sequelize.transaction();
+        try {
+            const { brandId } = req.params;
+
+            // Перевіряємо, чи був завантажений файл
+            if (!req.file) {
+                await t.rollback();
+                console.log('No file uploaded or file type is not supported');
+                return next(
+                    createError(
+                        400,
+                        'No file uploaded or file type is not supported',
+                    ),
+                );
+            }
+
+            const { filename } = req.file;
+
+            const currentBrand = await Brand.findByPk(brandId, {
+                transaction: t,
+                raw: true,
+                attributes: ['logo'],
+            });
+
+            if (!currentBrand) {
+                console.log('Brand not found');
+                await t.rollback();
+
+                const filePath = path.resolve(
+                    staticPath,
+                    'images',
+                    'brands',
+                    filename,
+                );
+                await fs
+                    .unlink(filePath)
+                    .catch((err) => console.log('File delete error:', err));
+                return next(createError(404, 'Brand not found'));
+            }
+
+            const oldLogoFilename = currentBrand.logo;
+
+            const [, [updatedBrand]] = await Brand.update(
+                { logo: filename },
+                {
+                    where: { id: brandId },
+                    returning: true,
+                    raw: true,
+                    fields: ['logo'],
+                    transaction: t,
+                },
+            );
+
+            console.log(`Result is: ${JSON.stringify(updatedBrand, null, 2)}`);
+            await t.commit();
+
+            if (oldLogoFilename) {
+                const filePath = path.resolve(
+                    staticPath,
+                    'images',
+                    'brands',
+                    oldLogoFilename,
+                );
+                await fs
+                    .unlink(filePath)
+                    .catch((err) => console.log('File delete error:', err));
+            }
+
+            res.status(200).json(updatedBrand);
+        } catch (error) {
+            console.log(error.message);
+            await t.rollback();
+            if (req.file) {
+                const filePath = path.resolve(
+                    staticPath,
+                    'images',
+                    'brands',
+                    req.file.filename,
+                );
+                await fs
+                    .unlink(filePath)
+                    .catch((err) => console.log('File delete error:', err));
+            }
+            next(error);
+        }
+    }
 }
 
 module.exports = new BrandsController();
