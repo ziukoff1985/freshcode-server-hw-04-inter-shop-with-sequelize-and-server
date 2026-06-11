@@ -1,11 +1,12 @@
 [
-  "20260518083356-create-brand.js",
-  "20260518083635-create-item-category.js",
-  "20260518083822-create-item-type.js",
-  "20260518083855-create-store.js",
-  "20260518084122-create-customer.js",
-  "20260518084201-create-model.js",
-  "20260518084241-create-item.js",
-  "20260518090003-create-order.js",
-  "20260518105536-create-items-orders.js"
+    "20260518083356-create-brand.js",
+    "20260518083635-create-item-category.js",
+    "20260518083822-create-item-type.js",
+    "20260518083855-create-store.js",
+    "20260518084122-create-customer.js",
+    "20260518084201-create-model.js",
+    "20260518084241-create-item.js",
+    "20260518090003-create-order.js",
+    "20260518105536-create-items-orders.js",
+    "20260611082330-add-logo-to-brands.js"
 ]
