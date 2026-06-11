@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Fk40pITkzx9br1lEJXQybghE2GCNl7MjQIQY4PknvpMp6zLk3xVADD9NPVyNtYm
+\restrict 5CgKxgaeuhXu0y9Zdodk3IHZnvQXqPkyaMEmKLngZ1WexCo7QcY3WJxAPK1oJL9
 
 -- Dumped from database version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
 -- Dumped by pg_dump version 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
@@ -32,7 +32,8 @@ CREATE TABLE public.brands (
     title character varying(255) NOT NULL,
     description text,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    logo character varying(255)
 );
 
 
@@ -415,24 +416,25 @@ ALTER TABLE ONLY public.stores ALTER COLUMN id SET DEFAULT nextval('public.store
 -- Data for Name: brands; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.brands (id, title, description, created_at, updated_at) FROM stdin;
-1	Samsung	Global electronics leader	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-2	Apple	Premium tech and software	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-3	Sony	Audio, video and gaming specialist	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-4	LG	Home appliances and display innovator	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-5	Dell	Computer and enterprise solutions	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-6	Bosch	German precision tools and appliances	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-7	Nike	Performance sports apparel	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-8	Logitech	Computer peripherals and accessories	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-9	Xiaomi	Affordable smart technology	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-10	Asus	Gaming and high-performance hardware	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-11	HP	Printers and business laptops	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-12	Bose	High-end audio solutions	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-13	Nikon	Professional imaging equipment	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-14	Dyson	Innovative home cleaning technology	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-15	Philips	Lighting and personal healthcare	2026-06-02 12:32:03.181926+03	2026-06-02 12:32:03.181926+03
-20	ENEXT	Some description about CNC	2026-06-02 13:30:15.671+03	2026-06-02 13:30:15.671+03
-21	CNC	Some description about CNC	2026-06-02 13:30:23.193+03	2026-06-02 13:30:23.193+03
+COPY public.brands (id, title, description, created_at, updated_at, logo) FROM stdin;
+26	CNC2	Some description about CNC	2026-06-09 12:50:07.457+03	2026-06-11 12:57:34.793+03	1781171854783-cnc.png
+1	Samsung	Global electronics leader	2026-06-02 12:32:03.181926+03	2026-06-11 12:25:14.69+03	1781169914681-samsung.png
+2	Apple	Premium tech and software	2026-06-02 12:32:03.181926+03	2026-06-11 12:25:38.015+03	1781169938001-apple.jpg
+3	Sony	Audio, video and gaming specialist	2026-06-02 12:32:03.181926+03	2026-06-11 12:26:01.661+03	1781169961651-sony.jpeg
+4	LG	Home appliances and display innovator	2026-06-02 12:32:03.181926+03	2026-06-11 12:26:24.265+03	1781169984252-lg.png
+5	Dell	Computer and enterprise solutions	2026-06-02 12:32:03.181926+03	2026-06-11 12:27:16.907+03	1781170036896-dell.png
+6	Bosch	German precision tools and appliances	2026-06-02 12:32:03.181926+03	2026-06-11 12:27:38.735+03	1781170058725-bosch.png
+7	Nike	Performance sports apparel	2026-06-02 12:32:03.181926+03	2026-06-11 12:28:15.29+03	1781170095279-nike.jpg
+8	Logitech	Computer peripherals and accessories	2026-06-02 12:32:03.181926+03	2026-06-11 12:28:44.012+03	1781170124003-logitech.webp
+9	Xiaomi	Affordable smart technology	2026-06-02 12:32:03.181926+03	2026-06-11 12:29:12.737+03	1781170152729-xiaomi.jpg
+10	Asus	Gaming and high-performance hardware	2026-06-02 12:32:03.181926+03	2026-06-11 12:29:30.004+03	1781170169993-asus.png
+11	HP	Printers and business laptops	2026-06-02 12:32:03.181926+03	2026-06-11 12:29:48.099+03	1781170188090-hp.png
+12	Bose	High-end audio solutions	2026-06-02 12:32:03.181926+03	2026-06-11 12:30:07.018+03	1781170207008-bose.png
+13	Nikon	Professional imaging equipment	2026-06-02 12:32:03.181926+03	2026-06-11 12:30:32.706+03	1781170232695-nikon.png
+14	Dyson	Innovative home cleaning technology	2026-06-02 12:32:03.181926+03	2026-06-11 12:31:14.623+03	1781170274598-dyson.jpg
+15	Philips	Lighting and personal healthcare	2026-06-02 12:32:03.181926+03	2026-06-11 12:31:29.015+03	1781170289006-philips.png
+20	ENEXT	Some description about CNC	2026-06-02 13:30:15.671+03	2026-06-11 12:33:05.932+03	1781170385923-enext.png
+21	CNC	Some description about CNC	2026-06-02 13:30:23.193+03	2026-06-11 12:33:27.139+03	1781170407130-cnc.png
 \.
 
 
@@ -759,63 +761,63 @@ COPY public.stores (id, title, description, created_at, updated_at) FROM stdin;
 -- Name: brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.brands_id_seq', 21, true);
+SELECT pg_catalog.setval('public.brands_id_seq', 26, true);
 
 
 --
 -- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.customers_id_seq', 22, true);
+SELECT pg_catalog.setval('public.customers_id_seq', 27, true);
 
 
 --
 -- Name: item_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.item_categories_id_seq', 19, true);
+SELECT pg_catalog.setval('public.item_categories_id_seq', 23, true);
 
 
 --
 -- Name: item_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.item_types_id_seq', 19, true);
+SELECT pg_catalog.setval('public.item_types_id_seq', 23, true);
 
 
 --
 -- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.items_id_seq', 55, true);
+SELECT pg_catalog.setval('public.items_id_seq', 59, true);
 
 
 --
 -- Name: models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.models_id_seq', 55, true);
+SELECT pg_catalog.setval('public.models_id_seq', 60, true);
 
 
 --
 -- Name: order_code_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.order_code_seq', 10054, true);
+SELECT pg_catalog.setval('public.order_code_seq', 10059, true);
 
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.orders_id_seq', 56, true);
+SELECT pg_catalog.setval('public.orders_id_seq', 61, true);
 
 
 --
 -- Name: stores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.stores_id_seq', 9, true);
+SELECT pg_catalog.setval('public.stores_id_seq', 13, true);
 
 
 --
@@ -1022,5 +1024,5 @@ ALTER TABLE ONLY public.orders
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Fk40pITkzx9br1lEJXQybghE2GCNl7MjQIQY4PknvpMp6zLk3xVADD9NPVyNtYm
+\unrestrict 5CgKxgaeuhXu0y9Zdodk3IHZnvQXqPkyaMEmKLngZ1WexCo7QcY3WJxAPK1oJL9
 
