@@ -1,7 +1,10 @@
 const createError = require('http-errors');
 const { Op } = require('sequelize');
-
-const { Brand } = require('../db/models/index');
+const fs = require('fs').promises;
+const path = require('path');
+// --------------------------------
+const { Brand, sequelize } = require('../db/models/index');
+const { staticPath } = require('../config/staticConfig');
 
 class BrandsController {
     async getAllBrands(req, res, next) {

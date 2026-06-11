@@ -1,7 +1,7 @@
 const { Router } = require('express');
 // -------------------------------
 const brandsController = require('../controllers/brandsController');
-const { validateBody, paginate } = require('../middleware/index');
+const { validateBody, paginate, upload } = require('../middleware/index');
 const {
     BRAND_VALIDATION_SCHEMA,
     BULK_FIND_SCHEMA,
@@ -32,5 +32,13 @@ router
     .route('/:id')
     .get(brandsController.getBrandById)
     .delete(brandsController.deleteBrand);
+
+// Router for uploading brand logo
+router
+    .route('/:brandId/logo')
+    .patch(
+        upload.uploadImages.single('brandLogo'),
+        brandsController.changeLogo,
+    );
 
 module.exports = router;
